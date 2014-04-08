@@ -1,169 +1,153 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title></title>
+    <title>wiVivo David y Taninos</title>
     <meta charset="utf-8" />
-    <link href="kendo/styles/kendo.mobile.all.min.css" rel="stylesheet" />
-    <link href="styles/main.css" rel="stylesheet" />
-
-    <script src="cordova.js"></script>
-    <script src="kendo/js/jquery.min.js"></script>
-    <script src="kendo/js/kendo.mobile.min.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true"></script>
-
-    <script src="scripts/login.js"></script>
-    <script src="scripts/location.js"></script>
-    <script src="scripts/weather.js"></script>
-    <script src="scripts/app.js"></script>
-    <style>
-        html .km-wp-light .km-content,
-        html .km-wp-light .km-button,
-        html .km-wp-light .km-navbar,
-        html .km-wp-light .km-detail,
-        html .km-wp-light *:not(.k-label) > input:not(.k-input),
-        html .km-wp-light .k-dropdown,
-        html .km-wp-light *:not(.k-label) > textarea,
-        html .km-wp-light *:not(.k-label) > select {
-            background: #fff;
-        }
-    </style>
+    <link rel="stylesheet" href="styles/kendo.mobile.all.min.css"/>
+    <link rel="stylesheet" href="styles/wiVivo.DavidTaninos.kendo.mobile.css"/>
+    <link rel="stylesheet" href="styles/wiVivo.css"/>
+    
+    <script type="text/javascript" src="scripts/wiVivo.js"></script>
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="scripts/jquery.min.js"></script>
+    <script type="text/javascript" src="scripts/kendo.mobile.min.js"></script>
+    <script type="text/javascript" src="scripts/app.js"></script>
 </head>
-<body>
-    <!--Home-->
-    <div id="tabstrip-home"
-        data-role="view"
-        data-title="Home">
-
+<body id="pantalla_fogar" onload="startAplauso();">
+    <!--Inicio-->
+    <div id="tabstrip-fogar" data-role="view" data-title="Fogar">
+    	<div class="view-content">
+        	<font color="black">    
+        	<h1>David Amor y Taninos Maduros Jazz Band</h1><h2>¿En qué consite?</h2>
+        	<h2>Pois trátase dun espectáculo único, novidoso e orixinal.</h2>
+        	<h3><p>Trátase de xuntar nun escenario a un humorista representando os seus mellores monólogos, 
+            cunha banda de jazz de 9 compoñentes e moita experiencia, interactuando coma nunca 
+            te terías imaxinado, nin a David Amor, nin a unha banda de jazz.</p>
+        	<p><img  width="93%" src="./imagenes/davytan.jpg"></p>
+			<p>Ademais, engadimos a este cóctel, as novas tecnoloxías. ¿Que che parecería se ao entrar ao teatro, 
+            en vez de dicirche que apagases o móbil, che dixesen que o acendeses?</p></h3>
+        	<h1 class="boton-negro boton-centro boton-text-all-color">
+            Con esta app poderás acceder á informacion do espectáculo e INTERACTUAR CON EL!!!</h1>
+			<h3><p>Mediante esta app formarás parte do propio espectáculo. Mantente atento e segue as instruccións 
+            que che irá indicando David. Moitas sorpresas iranse descubrindo e gozando a medida que avanza a actuación.</p></h3>
+        	</font>
+        	<br/>
+            <div id="div-comienzaShow"><!--BOTON COMEZASHOW--></div>
+        </div>
+    	<font color="black"><div><p>&copy; aerowi 2014</p></div></font>
+    </div>
+	<!--Nosotros-->    
+    <div id="tabstrip-nos" data-role="view" data-title="Nós">
         <div class="view-content">
-            <h1>Welcome!</h1>
-            <a id="skin-change" data-role="button" data-click="app.changeSkin">Flat</a>
-            <p>
-                Telerik AppBuilder&trade; enables you to build cross-platform device applications regardless of your
-                    development platform by combining the convenience of a local development toolset with the
-                    power and flexibility of the cloud.
-            </p>
-            <div class="img"></div>
-        </div>
-    </div>
-
-    <!--Login-->
-    <div id="tabstrip-login"
-        data-role="view"
-        data-title="Login"
-        data-model="app.loginService.viewModel">
-
-        <div class="view-content">
-            <div class="logo"></div>
-            <h3 data-bind="invisible: isLoggedIn">Enter your credentials:</h3>
-            <h1 class="welcome" data-bind="visible: isLoggedIn">Welcome, <span data-bind="text: username"></span>!
-            </h1>
-            <div class="buttonArea">
-                <input type="submit" id="logout" data-role="button" data-bind="click: onLogout, visible: isLoggedIn" class="login-button" value="Logout" />
-            </div>
-
-            <form data-bind="events: { keyup: checkEnter }">
-                <ul data-role="listview" data-style="inset" data-bind="invisible: isLoggedIn">
-                    <li>
-                        <label>
-                            Username
-                                <input type="text" data-bind="value: username" />
-                        </label>
-                    </li>
-                    <li>
-                        <label>
-                            Password
-                                <input type="password" data-bind="value: password" />
-                        </label>
-                    </li>
-                </ul>
-
-                <div class="buttonArea">
-                    <input type="submit" id="login" data-role="button" data-bind="click: onLogin, invisible: isLoggedIn" class="login-button" value="Login" />
-                </div>
-            </form>
-        </div>
-
-    </div>
-
-    <!--Location-->
-    <div id="tabstrip-location"
-        data-role="view"
-        data-title="Location"
-        data-init="app.locationService.initLocation"
-        data-show="app.locationService.show"
-        data-hide="app.locationService.hide"
-        data-model="app.locationService.viewModel"
-        data-stretch="true">
-
-        <div id="no-map" data-bind="invisible: isGoogleMapsInitialized">
-            Location requires internet connection to display the map.
-        </div>
-        <div id="map-search-wrap" data-bind="visible: isGoogleMapsInitialized">
-            <button id="map-navigate-home" data-bind="click: onNavigateHome"></button>
-            <form onsubmit="return false;">
-                <input id="map-address" type="search" data-bind="value: address" placeholder="Address" />
-                <input id="map-search" type="submit" value="" data-bind="click: onSearchAddress" />
-            </form>
-        </div>
-        <div id="map-canvas" data-bind="visible: isGoogleMapsInitialized"></div>
-
-    </div>
-
-    <!--Weather-->
-    <div id="tabstrip-weather"
-        data-role="view"
-        data-title="Weather"
-        data-model="app.weatherService.viewModel">
-
-        <div class="weather">
-            <p class="weather-title">20-Day Forecast</p>
-
-            <div class="separator">
-                <div class="dark"></div>
-                <div class="light"></div>
-            </div>
-
-            <ul class="forecast-list"
-                data-role="listview"
-                data-bind="source: weatherDataSource"
-                data-template="weather-forecast-template">
+            <p><img class="boton-negro boton-centro boton-text-all-color" width="93%" src="./imagenes/davidamor.jpg"></p>
+	        <font color="black">    
+            <h3><p>Comeza no 2001 en "O rei dá comedia", programa para a Tvg (onde ata o momento realiza a maior parte da 
+                súa carreira audiovisual). De aí pasa ao "Supermartes", programa veterano de variedades, onde desenvolve 
+                distintas disciplinas, colaborador, guionista, voz de marionetas.....</p>
+			<p>Na Tvg participará en varios proxectos durante anos. Programas de variedades como "Luar", "A terra dous prodixios", 
+                "Ou programón", e ata un espazo propio, "Supermáster".</p>
+            <p>Na ficción tamén contarán co en distintas cousas; "Mareas vivas", "4º sen ascensor", "Pataghorobí".
+				Polos bares a súa fama vai crecendo, cala entre o público para cada vez pisar mellores auditorios. Empeza a 
+                presentar eventos de relevancia como o Campionato do mundo de hokey, a gala nacional de Heineken, ou a gala de 
+                Gas Natural entre moitas outras.</p>
+            <p>Con toda esta experiencia David decide dar o salto a unha canle nacional. Preséntase ao casting de "O club do 
+                chiste", onde o collen e empeza a traballar con Globomedia, con grandes humoritas do talle de Anabel Alonso 
+                e Leo Harlem. Con este último crea un espectáculo, "Pasa a tomar un café cando queiras... " estreado en 2010. 
+                O éxito é tal que aínda seguen pechando datas con este espectáculo.</p>
+            <p>A súa fama como monologuista empeza a crecer participando en varias funcións por toda España de "O Club da Comedia", 
+                chegando a dar o salto ao programa homónimo de Tv, onde comparte escenario con Leo Harlem, Patricia Conde e 
+                Ernesto Sevilla.Na actualidade David ten encamiñada a súa carreira cara á ficción en televisión e cine a nivel 
+                audiovisual e como humorista percorre os teatros de España demostrando que sabe algo máis do que conta chistes</p>
+            </h3>
+            <ul data-role="listview" data-style="inset" data-type="group">
+                <li><ul><li><address>
+                            <p>@david_amor_tv</p>
+                            <p>www.davidamor.es</p>
+                </address></li></ul></li>
             </ul>
+            <h1>¿Quén son os Taninos Maduros Jazz Band?</h1>
+            <p><img class="boton-negro boton-centro boton-text-all-color" width="93%" src="./imagenes/taninos.jpg"></p>
+            <h3><p>Bili, Xosé Quiroga, Román Quiroga, Guerra, Sánchez, Moncho, Mestre Rulos e Lalo son a formación actual de 
+                Taninos Maduros Jazz Band. Hai máis de 20 anos que estes músicos fundaron unha "Big Band", formación que foi 
+                evolucionando ata a actual, que ten xa 9 anos de vida, e centos de km ás súas costas.</p>
+            <p>Tras unha longa traxectoria por salas de concertos, da man de Producións Etiqueta Negra xórdelles a posibilidade 
+                de compartir escenario nunha xira de grande éxito como a que foi Leo Harlem David Amor e os Taninos Maduros Jazz Band. 
+                Tras abarrotar todos os teatros de Galicia, deciden xa non se baixar das táboas, e volveron á carga con este novo espectáculo, 
+                no que teñen moito máis peso e se disputan do teu ao teu con David Amor o título honorífico de estrelas do espectáculo.</p>
+            </h3>
+            <h1>Etiqueta Negra</h1>
+            <p><img class="boton-negro boton-centro boton-text-all-color" width="93%" src="./imagenes/carteles.jpg"></p>
+            <h3><p>É unha empresa creada en Galicia fai mais de dez anos e adicada á organización e producción de 
+                eventos. Destaca especialmente a súa relación coa comedia e o mundo do humor, ámbito onde a súa
+                traxectoria es mais importante.</p>
+            <p>As súad funcións están centradas no asesoramento, así coma na planificación e organización de eventos.
+                Por un lado traballan cos grandes humoristas nacionais na producción dos seus eventos, ofrecendo unha 
+                atención integral as súas necesidades, tendo en conta tódalas circunstancias para asegura-lo perfecto 
+                desenvolvemento do seu traballo. Asimesmo traballan coas salas ou recintos de aforo medio coma 
+                colaboradores na difusión da sua programación e na planificación dos seus eventos de humor, así coma 
+                en todo o que necesiten.</p>
+            </h3>
+            <ul data-role="listview" data-style="inset" data-type="group">
+            	<li><ul><li><address>
+            		<p>Producciones Etiqueta Negra C.B.</p>
+                	<p>C/ La Estrella 12 bajo<br>Sarria (Lugo)<br>c.p. 27600</p>
+                	<p>www.etiquetanegra.org</p>
+                	<p>contacto@etiquetanegra.org</p>
+            	</address></li></ul></li>
+            </ul>
+        </font>  
         </div>
+    	<font color="black"><div><p>&copy; aerowi 2014</p></div></font>
+    </div>
+    
+ <!--Show-->
+    <div id="tabstrip-show" data-role="view" data-title="Show">
+        <p><button class="boton-negro boton-centro boton-text-all-color" type="button" onclick="location.href='#tabstrip-selfie';startSelfie();">
+        	<h1>::::::::::::::::::::<br/><br/>cando chegue o momento  Selfie... <br/> preme este botón!!!<br/><br/>::::::::::::::::::::<br/></h1></button></p>
+        <p><button class="boton-negro boton-centro boton-text-all-color" type="button" onclick="location.href='#tabstrip-loto';startLoto();">
+        	<h1>::::::::::::::::::::<br/><br/>cando chegue o momento   Loto... <br/> preme este botón!!!<br/><br/>::::::::::::::::::::<br/></h1></button></p>
+        <p><button class="boton-negro boton-centro boton-text-all-color" type="button" onclick="window.open('colorines.html');">
+        	<h1>::::::::::::::::::::<br/><br/>cando chegue o momento Colorines...<br/> preme este botón!!!<br/><br/>::::::::::::::::::::<br/></h1></button></p>
+    	<font color="black"><div><p>&copy; aerowi 2014</p></div></font>
     </div>
 
-    <!--Weather forecast template-->
-    <script type="text/x-kendo-tmpl" id="weather-forecast-template">
-        <div>
-            <div class="position-left">
-                <span class="weather-info date">${day}</span>
-            </div>
-            <div class="position-right">
-                <span class="weather-info temperature high">${highTemperature}<sup>&deg;</sup></span>
-                <span class="weather-info temperature low">${lowTemperature}<sup>&deg;</sup></span>
-            </div>
-            <div class="position-center">
-                <span class="weather-icon ${image}"></span>
-            </div>
+<!--Selfie-->    
+    <div id="tabstrip-selfie" data-role="view" data-title="Selfie">
+        <div class="view-content">
+            <h2 width="100%" class="boton-negro boton-centro boton-text-all-color">
+            	Pouco a pouco irás vendo as fotos que David faga dende o seu móbil. 
+            	Poderás gardalas con alta calidade no teu móbil pulsando sobre as que che gusten</h2>
         </div>
-    </script>
-
-    <!--Layout-->
+	    <ul data-role="listview" data-style="inset" data-type="group">
+        	<li>
+            	<ul id="tabstrip-selfie-fotos"><!--MUESTRA LAS FOTOS--></ul>
+        	</li>
+    	</ul>          
+    	<font color="black"><div><p>&copy; aerowi 2014</p></div></font>
+    </div>
+    
+<!--Loto-->    
+    <div id="tabstrip-loto"  data-role="view" data-title="Loto">
+        <img id="tabstrip-lotoFoto" style="display:none;margin:10px auto; width:100%;" src=""/>
+    	<font color="black"><div><p>&copy; aerowi 2014</p></div></font>
+    </div>
+    
+<!--Layout-->
     <div data-role="layout" data-id="tabstrip-layout">
-
         <!--Header-->
         <div data-role="header">
             <div data-role="navbar">
                 <span data-role="view-title"></span>
             </div>
         </div>
-
         <!--Footer-->
         <div data-role="footer">
             <div data-role="tabstrip">
-                <a href="#/" data-icon="home">Home</a>
-                <a href="#tabstrip-login" data-icon="contacts">Login</a>
-                <a href="#tabstrip-location" data-icon="search">Location</a>
-                <a href="#tabstrip-weather" data-icon="globe">Weather</a>
+                <a href="#tabstrip-fogar" data-icon="home">Fogar</a>
+                <a href="#tabstrip-nos" data-icon="bookmarks">Nós</a>
+                <a href="#tabstrip-show" data-icon="featured">Show</a>
+                <a href="#tabstrip-selfie" data-icon="camera">Selfie</a>
+                <a href="#tabstrip-loto" data-icon="favorites">Loto</a>
             </div>
         </div>
     </div>
