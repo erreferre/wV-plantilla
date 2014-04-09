@@ -5,7 +5,7 @@ document.addEventListener("deviceready", onDeviceReadyColorines, false);
 // PhoneGap is ready
 function onDeviceReadyColorines() {
     document.addEventListener("menubutton", cerrarColorines, false);
-    document.addEventListener("backbutton", atrasAppColorines, false);
+    document.addEventListener("backbutton", cerrarColorines, false);
     //document.addEventListener("backbutton", exitAppPopupColorines, false);
     startColorines();
     //alert('ondeviceready colorines');

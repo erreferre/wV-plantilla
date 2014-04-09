@@ -196,8 +196,8 @@ function startSelfie(){
         	$.each(data, function(key, val) {
             	foto = val.foto;
                 posicion = val.posicion;
-                newHTMLtmp = newHTMLtmp+'<button class="boton-negro boton-centro boton-text-all-color" onclick="descargaImagen(\''+foto+'\');">';
-                newHTMLtmp = newHTMLtmp+'<img src="'+servidor_thumbs+foto+'" /></button>';
+                newHTMLtmp = newHTMLtmp+'<button class="boton-negro boton-centro boton-text-all-color" onclick="descargaImagen(\''+foto+'\');">DESCARGA</button>';
+                //newHTMLtmp = newHTMLtmp+'<!--<img src="'+servidor_thumbs+foto+'" />-->';
         	});        
             document.getElementById("tabstrip-selfie-fotos").innerHTML = newHTMLtmp;
             if (errordetectado === 1){
@@ -230,23 +230,63 @@ function stopSelfie(){
     repeSelfie1 = null;
     //mostrarVariables();
 }
+
+//function getFilesystem(success, fail) {
+//			window.requestFileSystem = window.requestFileSystem || window.webkitRequestFileSystem;
+//			window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, success, fail);
+//}
+//function getFolder(fileSystem, folderName, success, fail) {
+//		fileSystem.root.getDirectory(folderName, {create: true, exclusive: false}, success, fail)
+//}
+//function transferFile (uri, filePath) {
+//	var transfer = new FileTransfer();
+//	transfer.download(
+//			uri,
+//			filePath,
+//			function(entry) {
+//				//var image = document.getElementById("downloadedImage");
+//				//image.src = entry.fullPath;
+//				document.getElementById("result").innerHTML = "Foto gardada en: " + entry.fullPath;
+//			},
+//			function(error) {
+ //               document.getElementById("result").innerHTML = "Houbo un erro, volve a descargala: Code = " + error.code;
+//				console.log("download error source " + error.source);
+//				console.log("download error target " + error.target);
+//				console.log("upload error code" + error.code);
+//			});
+//}
+
+
+    
 // Descarga Imagen
 function descargaImagen(imagen){
+    alert('descargaImagen');
 	var fileTransfer = new FileTransfer();
 	var uri = encodeURI(servidor_imagenes+imagen);
-	window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, onFileSystemSuccess, onError);
-    var directorioImagenes = function onFileSystemSuccess(fileSystem) {
-    	var filePath = fileSystem.name;
-        return filePath;
+    var filePath;
+    if (device.platform === 'Android'){
+        filePath = '/storage/sdcard0/';
+    } else {
+        filePath = '/';
     }
+	window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, onFileSystemSuccess, onError);
+    function onFileSystemSuccess(fileSystem) {
+    	if (device.platform === 'Android'){
+        	filePath = fileSystem.fullPath;
+    	} else {
+			filePath = fileSystem.root.fullPath;
+    	}
+	}
     fileTransfer.download(
     	uri,
-    	directorioImagenes,
+    	filePath,
     	function(entry) {
+            document.getElementById("div-resultado-descarga").innerHTML = "Foto gardada en: " + entry.fullPath;
         	alert("descarga completada: " + entry.fullPath);
     	},
     	function(error) {
-        	alert("descarga con erro: "+error.source+" destino: "+error.target+" codigo: " + error.code);
+        	document.getElementById("div-resultado-descarga").innerHTML = "Houbo un erro, volve a descargala: Code = " + error.code;
+			alert("descarga con erro: "+error.source+" destino: "+error.target+" codigo: " + error.code);
     	}
 	);
     function onError(error) {
