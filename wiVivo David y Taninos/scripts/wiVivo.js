@@ -58,6 +58,7 @@ var repeSelfie1 = null;
 var checkconexion = 0;
 var comienzashow = 0;
 var primeravezcomienzashow = 1;
+var showcomenzado = 0;
 var errordetectado = 0;
 var errornotificaciones = 0;
 var alertasactivadas = 1;
@@ -74,8 +75,7 @@ function mostrarVariables(){
 
 // Se lanza onDeviceready
 // chequea conexion, habilita los botones, popup alerta indicando que empezamos
-function startConsultaServidor()
-{
+function startConsultaServidor(){
     //alert('startConsultaServidor');
     var newHTML1;
     //var newHTMLfogar;
@@ -88,6 +88,7 @@ function startConsultaServidor()
     .done(function(data) {  
     	$.each(data, function(key, val) {
     		comienzashow = val.comienzashow;
+            showcomenzado = val.showcomenzado;
             //alert('valor de comienzashow:'+comienzashow);
             alertasactivadas = val.alertasactivadas;
             servidor_streaming = val.streaming;
@@ -122,7 +123,7 @@ function startConsultaServidor()
         		document.getElementById("div-comienzaShow-show").innerHTML = newHTMLshow;
         		document.getElementById("div-comienzaShow-selfie").innerHTML = newHTMLselfie;
         		document.getElementById("div-comienzaShow-loto").innerHTML = newHTMLloto;
-        		if (primeravezcomienzashow === 1){
+        		if ((primeravezcomienzashow === 1)&&(showcomenzado === 0)){
         			primeravezcomienzashow = 0;
                     navigator.notification.beep(2);
                     navigator.notification.vibrate(4000)
@@ -166,7 +167,11 @@ function startConsultaServidor()
 	});
     repestartConsultaServidor = setTimeout(startConsultaServidor, startconsultaservidorsettimeout);
 }    
-
+//STOP startConsultaServidor()
+function stopConsultaServidor(){
+    if (repestartConsultaServidor !== null) clearTimeout(repestartConsultaServidor);
+    repestartConsultaServidor = null;
+}
 
 // se lanza a comerzar el Show
 // (reproduce video "desde el camerino")
@@ -196,8 +201,8 @@ function startSelfie(){
         	$.each(data, function(key, val) {
             	foto = val.foto;
                 posicion = val.posicion;
-                newHTMLtmp = newHTMLtmp+'<button class="boton-negro boton-centro boton-text-all-color" onclick="descargaImagen(\''+foto+'\');">DESCARGA</button>';
-                //newHTMLtmp = newHTMLtmp+'<!--<img src="'+servidor_thumbs+foto+'" />-->';
+                newHTMLtmp = newHTMLtmp+'<button class="boton-negro boton-centro boton-text-all-color" onclick="descargaImagen(\''+foto+'\');">';
+                newHTMLtmp = newHTMLtmp+'<img src="'+servidor_thumbs+foto+'" /></button>';
         	});        
             document.getElementById("tabstrip-selfie-fotos").innerHTML = newHTMLtmp;
             if (errordetectado === 1){
@@ -231,67 +236,53 @@ function stopSelfie(){
     //mostrarVariables();
 }
 
-//function getFilesystem(success, fail) {
-//			window.requestFileSystem = window.requestFileSystem || window.webkitRequestFileSystem;
-//			window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, success, fail);
-//}
-//function getFolder(fileSystem, folderName, success, fail) {
-//		fileSystem.root.getDirectory(folderName, {create: true, exclusive: false}, success, fail)
-//}
-//function transferFile (uri, filePath) {
-//	var transfer = new FileTransfer();
-//	transfer.download(
-//			uri,
-//			filePath,
-//			function(entry) {
-//				//var image = document.getElementById("downloadedImage");
-//				//image.src = entry.fullPath;
-//				document.getElementById("result").innerHTML = "Foto gardada en: " + entry.fullPath;
-//			},
-//			function(error) {
- //               document.getElementById("result").innerHTML = "Houbo un erro, volve a descargala: Code = " + error.code;
-//				console.log("download error source " + error.source);
-//				console.log("download error target " + error.target);
-//				console.log("upload error code" + error.code);
-//			});
-//}
-
-
-    
+   
 // Descarga Imagen
 function descargaImagen(imagen){
-    alert('descargaImagen');
+    //alert('descargaImagen');
 	var fileTransfer = new FileTransfer();
 	var uri = encodeURI(servidor_imagenes+imagen);
     var filePath;
-    if (device.platform === 'Android'){
-        filePath = '/storage/sdcard0/';
-    } else {
-        filePath = '/';
-    }
-	window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, onFileSystemSuccess, onError);
+	//var statusDom;
+    //statusDom = document.querySelector('#div-progreso-descarga');
+    
+    document.getElementById("div-resultado-descarga").innerHTML = 'Estou descargando a foto. Espera un intre...';
+	window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, onFileSystemSuccess, onFileSystemError);
     function onFileSystemSuccess(fileSystem) {
-    	if (device.platform === 'Android'){
-        	filePath = fileSystem.fullPath;
+        if (device.platform === 'Android'){
+        	filePath = fileSystem.root.fullPath+'\/'+'DavidAmorSelfie'+imagen;
     	} else {
-			filePath = fileSystem.root.fullPath;
+			filePath = fileSystem.root.fullPath+"\/"+'DavidAmorSelfie'+imagen;
     	}
-	}
+        //alert(filePath);
+	};
+    fileTransfer.onprogress = function(progressEvent) {
+        if (progressEvent.lengthComputable) {
+			var perc = Math.floor(progressEvent.loaded / progressEvent.total * 200);
+			//statusDom.innerHTML = perc + "% cargado...";
+            document.getElementById("div-progreso-descarga").innerHTML = perc + '% cargado...';
+		} else {
+			//if(statusDom.innerHTML === "") {
+			//	statusDom.innerHTML = "cargando";
+			//} else {
+			//	statusDom.innerHTML += ".";
+			//}
+		}
+	};
     fileTransfer.download(
     	uri,
     	filePath,
     	function(entry) {
-            document.getElementById("div-resultado-descarga").innerHTML = "Foto gardada en: " + entry.fullPath;
+            document.getElementById("div-resultado-descarga").innerHTML = 'Foto gardada en: '+entry.fullPath;
         	alert("descarga completada: " + entry.fullPath);
     	},
     	function(error) {
-        	document.getElementById("div-resultado-descarga").innerHTML = "Houbo un erro, volve a descargala: Code = " + error.code;
+        	document.getElementById("div-resultado-descarga").innerHTML = 'Houbo un erro, volve a descargala';
 			alert("descarga con erro: "+error.source+" destino: "+error.target+" codigo: " + error.code);
+    	});
+    function onFileSystemError(error) {
+        	console.log(error.code);
     	}
-	);
-    function onError(error) {
-        console.log(error.code);
-    }
 	//navigator.notification.alert("PROXIMAMENTE SE PODRAN DESCARGAR LAS FOTOS...","INFO","OK");
 }
 
@@ -384,6 +375,7 @@ function exitAppPopup() {
         , function(button) {
               if (button === 2) {
                   window.plugins.powerManagement.release();
+                  stopConsultaServidor();stopSelfie();stopLoto();
                   navigator.app.exitApp();
               } 
           }
