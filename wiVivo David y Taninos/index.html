@@ -13,7 +13,7 @@
     <script type="text/javascript" src="scripts/kendo.mobile.min.js"></script>
     <script type="text/javascript" src="scripts/app.js"></script>
 </head>
-<body id="pantalla_fogar" onload="startAplauso();">
+<body id="pantalla_fogar" onload="startConsultaServidor();">
     <!--Inicio-->
     <div id="tabstrip-fogar" data-role="view" data-title="Fogar">
     	<div class="view-content">
@@ -32,11 +32,13 @@
             que che irá indicando David. Moitas sorpresas iranse descubrindo e gozando a medida que avanza a actuación.</p></h3>
         	</font>
         	<br/>
-            <div id="div-comienzaShow"><!--BOTON COMEZASHOW--></div>
+            <div id="div-comienzaShow-fogar-streaming"><!--STREAMING COMEZASHOW--></div>
+            <div id="div-comienzaShow-fogar"><!--BOTON COMEZASHOW--></div>
         </div>
     	<font color="black"><div><p>&copy; aerowi 2014</p></div></font>
     </div>
-	<!--Nosotros-->    
+    
+<!--Nosotros-->    
     <div id="tabstrip-nos" data-role="view" data-title="Nós">
         <div class="view-content">
             <p><img class="boton-negro boton-centro boton-text-all-color" width="93%" src="./imagenes/davidamor.jpg"></p>
@@ -75,6 +77,11 @@
                 Tras abarrotar todos os teatros de Galicia, deciden xa non se baixar das táboas, e volveron á carga con este novo espectáculo, 
                 no que teñen moito máis peso e se disputan do teu ao teu con David Amor o título honorífico de estrelas do espectáculo.</p>
             </h3>
+            <ul data-role="listview" data-style="inset" data-type="group">
+                <li><ul><li><address>
+                    <p>myspace.com/taninosmaduros</p>
+                </address></li></ul></li>
+            </ul>
             <h1>Etiqueta Negra</h1>
             <p><img class="boton-negro boton-centro boton-text-all-color" width="93%" src="./imagenes/carteles.jpg"></p>
             <h3><p>É unha empresa creada en Galicia fai mais de dez anos e adicada á organización e producción de 
@@ -102,32 +109,23 @@
     
  <!--Show-->
     <div id="tabstrip-show" data-role="view" data-title="Show">
-        <p><button class="boton-negro boton-centro boton-text-all-color" type="button" onclick="location.href='#tabstrip-selfie';startSelfie();">
-        	<h1>::::::::::::::::::::<br/><br/>cando chegue o momento  Selfie... <br/> preme este botón!!!<br/><br/>::::::::::::::::::::<br/></h1></button></p>
-        <p><button class="boton-negro boton-centro boton-text-all-color" type="button" onclick="location.href='#tabstrip-loto';startLoto();">
-        	<h1>::::::::::::::::::::<br/><br/>cando chegue o momento   Loto... <br/> preme este botón!!!<br/><br/>::::::::::::::::::::<br/></h1></button></p>
-        <p><button class="boton-negro boton-centro boton-text-all-color" type="button" onclick="window.open('colorines.html');">
-        	<h1>::::::::::::::::::::<br/><br/>cando chegue o momento Colorines...<br/> preme este botón!!!<br/><br/>::::::::::::::::::::<br/></h1></button></p>
-    	<font color="black"><div><p>&copy; aerowi 2014</p></div></font>
+        <div id="div-comienzaShow-show"><!--BOTON COMEZASHOW--></div>
+        <font color="black"><div><p>&copy; aerowi 2014</p></div></font>
     </div>
 
 <!--Selfie-->    
     <div id="tabstrip-selfie" data-role="view" data-title="Selfie">
-        <div class="view-content">
-            <h2 width="100%" class="boton-negro boton-centro boton-text-all-color">
-            	Pouco a pouco irás vendo as fotos que David faga dende o seu móbil. 
-            	Poderás gardalas con alta calidade no teu móbil pulsando sobre as que che gusten</h2>
-        </div>
-	    <ul data-role="listview" data-style="inset" data-type="group">
-        	<li>
-            	<ul id="tabstrip-selfie-fotos"><!--MUESTRA LAS FOTOS--></ul>
-        	</li>
-    	</ul>          
-    	<font color="black"><div><p>&copy; aerowi 2014</p></div></font>
+        <div id="div-comienzaShow-selfie"><!--BOTON COMEZASHOW--></div>
+	    <div id="div-comienzaShow-selfie2"><!--BOTON COMEZASHOW--></div>
+	    <ul data-role="listview" data-style="inset" data-type="group"><li>
+        	<ul id="tabstrip-selfie-fotos"><!--MUESTRA LAS FOTOS--></ul>
+        </li></ul>
+        <font color="black"><div><p>&copy; aerowi 2014</p></div></font>
     </div>
     
 <!--Loto-->    
     <div id="tabstrip-loto"  data-role="view" data-title="Loto">
+        <div id="div-comienzaShow-loto"><!--BOTON COMEZASHOW--></div>
         <img id="tabstrip-lotoFoto" style="display:none;margin:10px auto; width:100%;" src=""/>
     	<font color="black"><div><p>&copy; aerowi 2014</p></div></font>
     </div>

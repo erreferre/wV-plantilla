@@ -7,8 +7,8 @@
     <ProjectName>wiVivo David y Taninos</ProjectName>
     <IsRunnable>true</IsRunnable>
     <FrameworkVersion>3.2.0</FrameworkVersion>
-    <AndroidPermissions>android.permission.VIBRATE;android.permission.READ_PHONE_STATE;android.permission.INTERNET;android.permission.MODIFY_AUDIO_SETTINGS;android.permission.WRITE_EXTERNAL_STORAGE;android.permission.WAKE_LOCK</AndroidPermissions>
-    <CorePlugins>org.apache.cordova.battery-status;org.apache.cordova.camera;org.apache.cordova.media-capture;org.apache.cordova.console;org.apache.cordova.contacts;org.apache.cordova.device;org.apache.cordova.device-motion;org.apache.cordova.device-orientation;org.apache.cordova.file;org.apache.cordova.file-transfer;org.apache.cordova.geolocation;org.apache.cordova.globalization;org.apache.cordova.inappbrowser;org.apache.cordova.media;org.apache.cordova.network-information;org.apache.cordova.dialogs;org.apache.cordova.splashscreen;org.apache.cordova.statusbar;org.apache.cordova.vibration</CorePlugins>
+    <AndroidPermissions>android.permission.INTERNET;android.permission.MODIFY_AUDIO_SETTINGS;android.permission.READ_PHONE_STATE;android.permission.VIBRATE;android.permission.WAKE_LOCK;android.permission.WRITE_EXTERNAL_STORAGE</AndroidPermissions>
+    <CorePlugins>org.apache.cordova.console;org.apache.cordova.device;org.apache.cordova.file;org.apache.cordova.file-transfer;org.apache.cordova.inappbrowser;org.apache.cordova.media;org.apache.cordova.network-information;org.apache.cordova.dialogs;org.apache.cordova.splashscreen;org.apache.cordova.statusbar;org.apache.cordova.vibration</CorePlugins>
     <DeviceOrientations>Portrait;Landscape</DeviceOrientations>
     <iOSStatusBarStyle>Default</iOSStatusBarStyle>
     <AndroidHardwareAcceleration>false</AndroidHardwareAcceleration>
@@ -20,6 +20,13 @@
     <Author>aerowi</Author>
     <iOSDeviceFamily>1;2</iOSDeviceFamily>
     <iOSBackgroundMode>audio</iOSBackgroundMode>
+    <AndroidVersionCode>1</AndroidVersionCode>
+    <WP8Requirements />
+    <WP8Capabilities />
+    <WP8TileTitle />
+    <WP8ProductID>{ba9605d8-d4ae-407c-8251-660424f19e78}</WP8ProductID>
+    <WP8PublisherID>{e36b058a-5d13-4318-b092-402640dcde8d}</WP8PublisherID>
+    <WP8Publisher />
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath)\Telerik\ICE\Tools\Mobile\MobileTools.targets" />
 </Project>
