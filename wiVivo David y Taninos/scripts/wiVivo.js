@@ -278,7 +278,7 @@ function descargaImagen(imagen){
     	rutaImagen,
     	function(entry) {
             document.getElementById("div-resultado-descarga").innerHTML = '';
-            document.getElementById("div-resultado-descarga-ruta").innerHTML += 'Foto gardada en: '+entry.fullPath+'\n';
+            document.getElementById("div-resultado-descarga-ruta").innerHTML += 'Foto gardada en: '+entry.fullPath+'<br/>';
         	//alert("descarga completada: " + entry.fullPath);
     	},
     	function(error) {
