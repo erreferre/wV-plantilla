@@ -254,7 +254,7 @@ function descargaImagen(imagen){
     //alert('descargaImagen');
 	var fileTransfer = new FileTransfer();
 	var uri = encodeURI(servidor_imagenes+imagen);
-    //var filePath;
+    var rutaImagen = filePath+imagen;
 	//var statusDom;
     //statusDom = document.querySelector('#div-progreso-descarga');
     
@@ -275,7 +275,7 @@ function descargaImagen(imagen){
 	};
     fileTransfer.download(
     	uri,
-    	filePath,
+    	rutaImagen,
     	function(entry) {
             document.getElementById("div-resultado-descarga").innerHTML = '';
             document.getElementById("div-resultado-descarga-ruta").innerHTML += 'Foto gardada en: '+entry.fullPath;
