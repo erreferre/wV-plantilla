@@ -89,7 +89,6 @@ function startConsultaServidor(){
     	$.each(data, function(key, val) {
     		comienzashow = val.comienzashow;
             showcomenzado = val.showcomenzado;
-            //alert('valor de comienzashow:'+comienzashow);
             alertasactivadas = val.alertasactivadas;
             servidor_streaming = val.streaming;
             streamingactivado = val.streamingactivado;
@@ -99,7 +98,7 @@ function startConsultaServidor(){
 			startlotosettimeout = val.startLotosetTimeout;
 		    if (comienzashow === 0) {
     			newHTML1 = '<font color="black"><h1><p>TODAVÍA NON COMEZOU O ESPECTÁCULO E A MAIORÍA DAS FUNCIÓNS DESTA APP ESTÁN DESHABILITADAS<p>\
-					<p>PRESTA ATENCIÓN Á MEGAFONÍA</p></h1>';
+					<p>PRESTA ATENCIÓN Á MEGAFONÍA</p></h1></font>';
         		//document.getElementById("div-comienzaShow-fogar").innerHTML = newHTML1;
         		document.getElementById("div-comienzaShow-show").innerHTML = newHTML1;
         		document.getElementById("div-comienzaShow-selfie").innerHTML = newHTML1;
@@ -127,7 +126,7 @@ function startConsultaServidor(){
         			primeravezcomienzashow = 0;
                     navigator.notification.beep(2);
                     navigator.notification.vibrate(4000)
-	    			navigator.notification.alert("Isto arrinca... Agora podes ve-los botóns. Non te preocupes, irémosche dicindo cal pulsar...",comienzaShow(),"COMEZA O ESPECTÁCULO!!!", "OK");
+	    			navigator.notification.alert("Isto arrinca... Agora podes ver uns botóns. Non te preocupes, irémosche dicindo cal pulsar...",comienzaShow(),"COMEZA O ESPECTÁCULO!!!", "OK");
         		}
     		}
             if (aplausoechado === 0 && aplausoactivado === 1 ){
@@ -153,16 +152,15 @@ function startConsultaServidor(){
 	.fail(function(jqxhr, textStatus, error){
     	if (errordetectado === 0){
             errordetectado = 1;
-            errornotificaciones = 2;
+            errornotificaciones = 8;
 		}
         if (alertasactivadas === 1){
-            if (errornotificaciones === 2){
+            if (errornotificaciones === 5){
             	navigator.notification.alert("Proba de novo... parece que non dou conectado (recorda que tes que estar no espectáculo e conectado a súa WiFi)",irFogar(),"ERRO NA COMUNICACION", "OK");
-                errornotificaciones = errornotificaciones - 1;
             } else if (errornotificaciones === 1){
-	            navigator.notification.alert("Proba outra vez ou sae da App (pulsando o botón menú do teu móbil), conéctate á WiFi, e volve a lanza-la App",irFogar(),"ERRO NA COMUNICACION", "OK");
-                errornotificaciones = errornotificaciones - 1;
+	            navigator.notification.alert("Sae da App (pulsando o botón menú do teu móbil), conéctate á WiFi, e volve a lanza-la App",irFogar(),"ERRO NA COMUNICACION", "OK");
             }
+            errornotificaciones = errornotificaciones - 1;
         }
 	});
     repestartConsultaServidor = setTimeout(startConsultaServidor, startconsultaservidorsettimeout);
@@ -191,9 +189,9 @@ function startSelfie(){
     var val;
 	var newHTMLselfie2;
     //mostrarVariables();
-    newHTMLselfie2 = '<div class="view-content"><h2 width="100%" class="boton-negro boton-centro boton-text-all-color">\
+    newHTMLselfie2 = '<button width="100%" class="boton-negro boton-centro boton-text-all-color"><h2>\
             Pouco a pouco irás vendo as fotos que David faga dende o seu móbil.\
-        	Poderás gardalas con alta calidade no teu móbil pulsando sobre as que che gusten</h2></div>';
+        	Poderás gardalas con alta calidade no teu móbil pulsando sobre as que che gusten.</h2></button>';
 	document.getElementById("div-comienzaShow-selfie2").innerHTML = newHTMLselfie2;        
     $.getJSON(servidor_selfie)
     	.done(function(data) {
@@ -215,16 +213,15 @@ function startSelfie(){
 	    .fail(function(jqxhr, textStatus, error){
     		if (errordetectado === 0){
                 errordetectado = 1;
-                errornotificaciones = 2;
+                errornotificaciones = 8;
 			}
             if (alertasactivadas === 1){
-                if (errornotificaciones === 2){
+                if (errornotificaciones === 5){
                 	navigator.notification.alert("Proba de novo... parece que non dou conectado",irFogar(),"ERRO NA COMUNICACION", "OK");
-                    errornotificaciones = errornotificaciones - 1;
                 } else if (errornotificaciones === 1){
 	                navigator.notification.alert("Proba outra vez ou sae da App (pulsando o botón menú do teu móbil), conéctate á WiFi, e volve a lanza-la App",irFogar(),"ERRO NA COMUNICACION", "OK");
-                    errornotificaciones = errornotificaciones - 1;
                 }
+                errornotificaciones = errornotificaciones - 1;
             }
     	});
     repeSelfie1 = setTimeout(startSelfie, startselfiesettimeout);
@@ -293,8 +290,8 @@ function startLoto(){
     var val;
     var newHTMLloto2;
     //mostrarVariables();
-    newHTMLloto2 = '<div class="view-content"><h2 width="100%" class="boton-negro boton-centro boton-text-all-color">\
-            ¿Quen será o afortunado...?</h2></div>';
+    newHTMLloto2 = '<button width="100%" class="boton-negro boton-centro boton-text-all-color"><h2>\
+            ¿Quen será o afortunado...? Permanece atento á pantalla.</h2></button>';
 	if (ganador === 0) {document.getElementById("div-comienzaShow-loto2").innerHTML = newHTMLloto2;        
     } else {
            document.getElementById("div-comienzaShow-loto2").innerHTML = ''; 
@@ -326,16 +323,15 @@ function startLoto(){
 	    .fail(function(jqxhr, textStatus, error){
     		if (errordetectado === 0){
                 errordetectado = 1;
-                errornotificaciones = 2;
+                errornotificaciones = 8;
 			}
             if (alertasactivadas === 1){
-                if (errornotificaciones === 2){
+                if (errornotificaciones === 5){
                 	navigator.notification.alert("Proba de novo... parece que non dou conectado",irFogar(),"ERRO NA COMUNICACION", "OK");
-                    errornotificaciones = errornotificaciones - 1;
                 } else if (errornotificaciones === 1){
 	                navigator.notification.alert("Proba outra vez ou sae da App (pulsando o botón menú do teu móbil), conéctate á WiFi, e volve a lanza-la App",irFogar(),"ERRO NA COMUNICACION", "OK");
-                    errornotificaciones = errornotificaciones - 1;
                 }
+                errornotificaciones = errornotificaciones - 1;
             }
     	});
     repeLoto1 = setTimeout(startLoto, startlotosettimeout);

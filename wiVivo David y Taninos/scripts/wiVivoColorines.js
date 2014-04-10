@@ -33,6 +33,7 @@ var repeColorines2Colorines = null;
 
 var checkconexionColorines = 0;
 var errordetectadoColorines = 0;
+var errornotificacionesColorines = 0;
 var alertasactivadasColorines = 1;
 var primeravez = 1;
 
@@ -86,9 +87,13 @@ function startColorines(){
 	.fail(function(jqxhr, textStatus, error){
 		if (errordetectadoColorines === 0){
             errordetectadoColorines = 1;
-            if (alertasactivadasColorines === 1){
-                navigator.notification.alert("Parece que perdín a conexión... volve premer o botón",cerrarColorines(),"ERRO NA COMUNICACION", "OK");
-        	}
+            errornotificacionesColorines = 3;
+        }
+        if (alertasactivadasColorines === 1){
+            if (errornotificacionesColorines === 1){
+	            navigator.notification.alert("Parece que perdín a conexión... volve premer o botón Colorines",cerrarColorines(),"ERRO NA COMUNICACION", "OK");
+	        }
+            errornotificacionesColorines = errornotificacionesColorines - 1;
         }
 	});
     repeColorines2Colorines = setTimeout(startColorines, startcolorinessettimeout);
