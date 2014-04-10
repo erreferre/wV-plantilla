@@ -6,7 +6,7 @@ document.addEventListener("deviceready", onDeviceReady, false);
 function onDeviceReady() {
     //PONER SOLO menubutton EN LA VERSION RELEASE
     document.addEventListener("menubutton", exitAppPopup, false);
-    //document.addEventListener("backbutton", atrasApp, false);
+    //document.addEventListener("backbutton", irShow, false);
     document.addEventListener("backbutton", exitAppPopup, false);
     //alert('onDeviceReady');
     window.plugins.powerManagement.acquire();
@@ -258,7 +258,7 @@ function descargaImagen(imagen){
 	//var statusDom;
     //statusDom = document.querySelector('#div-progreso-descarga');
     
-    document.getElementById("div-resultado-descarga").innerHTML = 'Estou descargando a foto. Espera un intre...';
+    document.getElementById("div-resultado-descarga").innerHTML = 'Descargando a foto. Espera un intre...';
 	fileTransfer.onprogress = function(progressEvent) {
         if (progressEvent.lengthComputable) {
 			var perc = Math.floor(progressEvent.loaded / progressEvent.total * 50);
@@ -282,7 +282,7 @@ function descargaImagen(imagen){
         	//alert("descarga completada: " + entry.fullPath);
     	},
     	function(error) {
-        	document.getElementById("div-resultado-descarga").innerHTML = 'Houbo un erro, volve a descargala: '+error.code;
+        	document.getElementById("div-resultado-descarga").innerHTML = 'Houbo un erro, volve a descargala';
 			//alert("descarga con erro: "+error.source+" destino: "+error.target+" codigo: " + error.code);
     	});
 	//navigator.notification.alert("PROXIMAMENTE SE PODRAN DESCARGAR LAS FOTOS...","INFO","OK");
