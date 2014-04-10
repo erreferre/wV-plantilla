@@ -263,7 +263,7 @@ function descargaImagen(imagen){
         if (progressEvent.lengthComputable) {
 			var perc = Math.floor(progressEvent.loaded / progressEvent.total * 50);
 			//statusDom.innerHTML = perc + "% cargado...";
-            document.getElementById("div-progreso-descarga").innerHTML = perc + '% cargado...';
+            document.getElementById("div-progreso-descarga").innerHTML = perc + '% descargado...';
 		} else {
             document.getElementById("div-progreso-descarga").innerHTML += '.';
 			//if(statusDom.innerHTML === "") {
