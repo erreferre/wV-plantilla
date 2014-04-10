@@ -10,6 +10,7 @@ function onDeviceReady() {
     document.addEventListener("backbutton", exitAppPopup, false);
     //alert('onDeviceReady');
     window.plugins.powerManagement.acquire();
+    window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, onFileSystemSuccess, onFileSystemError);
     startConsultaServidor();
 };
 
@@ -53,6 +54,18 @@ var repeLoto1 = null;
 
 //variables Selfie
 var repeSelfie1 = null;
+var filePath = null;
+function onFileSystemSuccess(fileSystem) {
+        if (device.platform === 'Android'){
+        	filePath = fileSystem.root.fullPath+'\/'+'DavidAmorSelfie_';
+    	} else {
+			filePath = fileSystem.root.fullPath+"\/"+'DavidAmorSelfie_';
+    	}
+        //alert(filePath);
+};
+function onFileSystemError(error) {
+    	console.log(error.code);
+}; 
 
 //otras variables
 var checkconexion = 0;
@@ -70,7 +83,7 @@ function mostrarVariables(){
 		ganador+"\n lotoactivada:"+lotoactivada+"\ loto:"+loto+"\n repeLoto1:"+repeLoto1+"\n color:"+color+"\n colores:"+
     	colores+"\n colorseleccionado:"+colorseleccionado+"\n intermitencia:"+intermitencia+"\ repeColorines1:"+repeColorines1+
     	"\n repeColorines2:"+repeColorines2+"\n checkconexion:"+checkconexion,"INFO","INFO","OK");
-}
+};
 
 
 // Se lanza onDeviceready
@@ -164,12 +177,13 @@ function startConsultaServidor(){
         }
 	});
     repestartConsultaServidor = setTimeout(startConsultaServidor, startconsultaservidorsettimeout);
-}    
+};
+    
 //STOP startConsultaServidor()
 function stopConsultaServidor(){
     if (repestartConsultaServidor !== null) clearTimeout(repestartConsultaServidor);
     repestartConsultaServidor = null;
-}
+};
 
 // se lanza a comerzar el Show
 // (reproduce video "desde el camerino")
@@ -180,7 +194,7 @@ function comienzaShow(){
     //	document.getElementById("div-comienzaShow-fogar-streaming").innerHTML = newHTML;
     //}
     window.location.href='index.html#tabstrip-show';
-}    
+};
 
 
 // Lanza Selfie
@@ -225,13 +239,14 @@ function startSelfie(){
             }
     	});
     repeSelfie1 = setTimeout(startSelfie, startselfiesettimeout);
-}
+};
+
 // Cancela Selfie
 function stopSelfie(){
     if (repeSelfie1 !== null) clearTimeout(repeSelfie1);
     repeSelfie1 = null;
     //mostrarVariables();
-}
+};
 
    
 // Descarga Imagen
@@ -239,26 +254,18 @@ function descargaImagen(imagen){
     //alert('descargaImagen');
 	var fileTransfer = new FileTransfer();
 	var uri = encodeURI(servidor_imagenes+imagen);
-    var filePath;
+    //var filePath;
 	//var statusDom;
     //statusDom = document.querySelector('#div-progreso-descarga');
     
     document.getElementById("div-resultado-descarga").innerHTML = 'Estou descargando a foto. Espera un intre...';
-	window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, onFileSystemSuccess, onFileSystemError);
-    function onFileSystemSuccess(fileSystem) {
-        if (device.platform === 'Android'){
-        	filePath = fileSystem.root.fullPath+'\/'+'DavidAmorSelfie'+imagen;
-    	} else {
-			filePath = fileSystem.root.fullPath+"\/"+'DavidAmorSelfie'+imagen;
-    	}
-        //alert(filePath);
-	};
-    fileTransfer.onprogress = function(progressEvent) {
+	fileTransfer.onprogress = function(progressEvent) {
         if (progressEvent.lengthComputable) {
-			var perc = Math.floor(progressEvent.loaded / progressEvent.total * 200);
+			var perc = Math.floor(progressEvent.loaded / progressEvent.total * 50);
 			//statusDom.innerHTML = perc + "% cargado...";
             document.getElementById("div-progreso-descarga").innerHTML = perc + '% cargado...';
 		} else {
+            document.getElementById("div-progreso-descarga").innerHTML += '.';
 			//if(statusDom.innerHTML === "") {
 			//	statusDom.innerHTML = "cargando";
 			//} else {
@@ -270,18 +277,16 @@ function descargaImagen(imagen){
     	uri,
     	filePath,
     	function(entry) {
-            document.getElementById("div-resultado-descarga").innerHTML = 'Foto gardada en: '+entry.fullPath;
-        	alert("descarga completada: " + entry.fullPath);
+            document.getElementById("div-resultado-descarga").innerHTML = '';
+            document.getElementById("div-resultado-descarga-ruta").innerHTML += 'Foto gardada en: '+entry.fullPath;
+        	//alert("descarga completada: " + entry.fullPath);
     	},
     	function(error) {
-        	document.getElementById("div-resultado-descarga").innerHTML = 'Houbo un erro, volve a descargala';
-			alert("descarga con erro: "+error.source+" destino: "+error.target+" codigo: " + error.code);
+        	document.getElementById("div-resultado-descarga").innerHTML = 'Houbo un erro, volve a descargala: '+error.code;
+			//alert("descarga con erro: "+error.source+" destino: "+error.target+" codigo: " + error.code);
     	});
-    function onFileSystemError(error) {
-        	console.log(error.code);
-    	}
 	//navigator.notification.alert("PROXIMAMENTE SE PODRAN DESCARGAR LAS FOTOS...","INFO","OK");
-}
+};
 
 
 // Lanza Loto
@@ -335,12 +340,13 @@ function startLoto(){
             }
     	});
     repeLoto1 = setTimeout(startLoto, startlotosettimeout);
-}
+};
+
 // Cancela Loto
 function stopLoto(){
     if (repeLoto1 !== null) clearTimeout(repeLoto1);
     repeLoto1 = null;
-}
+};
  
 
 // Play sonidos
@@ -355,13 +361,15 @@ function playAudio(src) {
   window.setTimeout(function() {
   	mi_sonido.setVolume('0.0');
   }, 60000);
-}
+};
+
 function playSuccess() {
   console.log("playAudio():Audio Success");
-}
+};
+
 function playError(error) {
   navigator.notification.alert("non se puido reproduci-la son",irFogar(),"ERRO NA REPRODUCCION", "OK");
-}
+};
 
 
 //opcion de Exit
@@ -379,12 +387,12 @@ function exitAppPopup() {
         , "Pois non, Pois si"
     );
     return false;
-}
+};
 
 function irShow(){
     window.location.href='index.html#tabstrip-show';
-}
+};
 
 function irFogar(){
     window.location.href='index.html#tabstrip-fogar';
-}
+};
