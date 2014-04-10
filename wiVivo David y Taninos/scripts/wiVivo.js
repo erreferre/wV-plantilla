@@ -6,8 +6,8 @@ document.addEventListener("deviceready", onDeviceReady, false);
 function onDeviceReady() {
     //PONER SOLO menubutton EN LA VERSION RELEASE
     document.addEventListener("menubutton", exitAppPopup, false);
-    //document.addEventListener("backbutton", irShow, false);
-    document.addEventListener("backbutton", exitAppPopup, false);
+    document.addEventListener("backbutton", irShow, false);
+    //document.addEventListener("backbutton", exitAppPopup, false);
     //alert('onDeviceReady');
     window.plugins.powerManagement.acquire();
     window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, onFileSystemSuccess, onFileSystemError);
@@ -17,9 +17,9 @@ function onDeviceReady() {
 //alert('variables globales');
 //variables Globales
 //CAMBIAR PARA COMPILAR RELEASE
-//var servidor_wivivo = 'http://srv001.liveshowsync.local';
-var servidor_wivivo = 'http://192.168.10.155';
-alert (servidor_wivivo);
+var servidor_wivivo = 'http://srv001.liveshowsync.local';
+//var servidor_wivivo = 'http://192.168.10.155';
+//alert (servidor_wivivo);
 var servidor_streaming = null;
 //var servidor_streaming = 'http://192.168.10.140:8080/jsfs.html';
 
@@ -30,7 +30,7 @@ var servidor_selfie = webservice_wivivo + 'leeThumbs.php';
 var servidor_imagenes = webservice_wivivo + 'subido/';
 var servidor_thumbs = webservice_wivivo + 'subido/thumbs/';
 
-var repestartConsultaServidor = null;
+var repeConsultaServidor1 = null;
 
 //tiempos iteracion de bucles
 var startconsultaservidorsettimeout = 10000;
@@ -41,7 +41,7 @@ var startlotosettimeout = 20000;
 var archivo_pedo = 'sonidos/pedo3.mp3';
 var archivo_aplauso = 'sonidos/aplauso1.mp3';
 var archivo_guapo = archivo_aplauso;//'sonidos/guapo.mp3';
-var repeAplauso1 = null;
+//var repeAplauso1 = null;
 var aplausoechado = 0;
 var aplausoactivado = 0;
 
@@ -176,13 +176,13 @@ function startConsultaServidor(){
             errornotificaciones = errornotificaciones - 1;
         }
 	});
-    repestartConsultaServidor = setTimeout(startConsultaServidor, startconsultaservidorsettimeout);
+    repeConsultaServidor1 = setTimeout(startConsultaServidor, startconsultaservidorsettimeout);
 };
     
 //STOP startConsultaServidor()
 function stopConsultaServidor(){
-    if (repestartConsultaServidor !== null) clearTimeout(repestartConsultaServidor);
-    repestartConsultaServidor = null;
+    if (repeConsultaServidor1 !== null) clearTimeout(repeConsultaServidor1);
+    repeConsultaServidor1 = null;
 };
 
 // se lanza a comerzar el Show
@@ -219,7 +219,7 @@ function startSelfie(){
             document.getElementById("tabstrip-selfie-fotos").innerHTML = newHTMLtmp;
             if (errordetectado === 1){
                 if (alertasactivadas === 1){
-                    navigator.notification.alert("Parece que xa vai...",irFogar(),"COMUNICACION RECUPERADA", "OK");
+                    navigator.notification.alert("Parece que xa vai...",irShow(),"COMUNICACION RECUPERADA", "OK");
             	}
             }
             errordetectado = 0;
@@ -231,7 +231,7 @@ function startSelfie(){
 			}
             if (alertasactivadas === 1){
                 if (errornotificaciones === 5){
-                	navigator.notification.alert("Proba de novo... parece que non dou conectado",irFogar(),"ERRO NA COMUNICACION", "OK");
+                	navigator.notification.alert("Proba de novo... parece que non dou conectado",irShow(),"ERRO NA COMUNICACION", "OK");
                 } else if (errornotificaciones === 1){
 	                navigator.notification.alert("Proba outra vez ou sae da App (pulsando o botón menú do teu móbil), conéctate á WiFi, e volve a lanza-la App",irFogar(),"ERRO NA COMUNICACION", "OK");
                 }
@@ -255,22 +255,14 @@ function descargaImagen(imagen){
 	var fileTransfer = new FileTransfer();
 	var uri = encodeURI(servidor_imagenes+imagen);
     var rutaImagen = filePath+imagen;
-	//var statusDom;
-    //statusDom = document.querySelector('#div-progreso-descarga');
     
     document.getElementById("div-resultado-descarga").innerHTML = 'Descargando a foto. Espera un intre...';
 	fileTransfer.onprogress = function(progressEvent) {
         if (progressEvent.lengthComputable) {
 			var perc = Math.floor(progressEvent.loaded / progressEvent.total * 50);
-			//statusDom.innerHTML = perc + "% cargado...";
             document.getElementById("div-progreso-descarga").innerHTML = perc + '% descargado...';
 		} else {
             document.getElementById("div-progreso-descarga").innerHTML += '.';
-			//if(statusDom.innerHTML === "") {
-			//	statusDom.innerHTML = "cargando";
-			//} else {
-			//	statusDom.innerHTML += ".";
-			//}
 		}
 	};
     fileTransfer.download(
@@ -320,7 +312,7 @@ function startLoto(){
         	});
             if (errordetectado === 1){
                 if (alertasactivadas === 1){
-                    navigator.notification.alert("Parece que xa vai...",irFogar(),"COMUNICACION RECUPERADA", "OK");
+                    navigator.notification.alert("Parece que xa vai...",irShow(),"COMUNICACION RECUPERADA", "OK");
             	}
             }
             errordetectado = 0;
@@ -332,9 +324,9 @@ function startLoto(){
 			}
             if (alertasactivadas === 1){
                 if (errornotificaciones === 5){
-                	navigator.notification.alert("Proba de novo... parece que non dou conectado",irFogar(),"ERRO NA COMUNICACION", "OK");
+                	navigator.notification.alert("Proba de novo... parece que non dou conectado",irShow(),"ERRO NA COMUNICACION", "OK");
                 } else if (errornotificaciones === 1){
-	                navigator.notification.alert("Proba outra vez ou sae da App (pulsando o botón menú do teu móbil), conéctate á WiFi, e volve a lanza-la App",irFogar(),"ERRO NA COMUNICACION", "OK");
+	                navigator.notification.alert("Sae da App (pulsando o botón menú do teu móbil), conéctate á WiFi, e volve a lanza-la App",irFogar(),"ERRO NA COMUNICACION", "OK");
                 }
                 errornotificaciones = errornotificaciones - 1;
             }

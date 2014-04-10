@@ -7,7 +7,7 @@
     <ProjectName>wiVivo David y Taninos</ProjectName>
     <IsRunnable>true</IsRunnable>
     <FrameworkVersion>3.2.0</FrameworkVersion>
-    <AndroidPermissions>android.permission.INTERNET;android.permission.MODIFY_AUDIO_SETTINGS;android.permission.READ_PHONE_STATE;android.permission.VIBRATE;android.permission.WAKE_LOCK;android.permission.WRITE_EXTERNAL_STORAGE</AndroidPermissions>
+    <AndroidPermissions>android.permission.INTERNET;android.permission.MODIFY_AUDIO_SETTINGS;android.permission.VIBRATE;android.permission.WAKE_LOCK;android.permission.WRITE_EXTERNAL_STORAGE</AndroidPermissions>
     <CorePlugins>org.apache.cordova.console;org.apache.cordova.device;org.apache.cordova.file;org.apache.cordova.file-transfer;org.apache.cordova.inappbrowser;org.apache.cordova.media;org.apache.cordova.network-information;org.apache.cordova.dialogs;org.apache.cordova.splashscreen;org.apache.cordova.statusbar;org.apache.cordova.vibration</CorePlugins>
     <DeviceOrientations>Portrait;Landscape</DeviceOrientations>
     <iOSStatusBarStyle>Default</iOSStatusBarStyle>

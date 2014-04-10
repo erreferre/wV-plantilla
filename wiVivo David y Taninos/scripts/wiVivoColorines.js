@@ -13,9 +13,9 @@ function onDeviceReadyColorines() {
 
 //variables Globales
 //CAMBIAR PARA COMPILAR RELEASE
-//var servidor_wivivoColorines = 'http://srv001.liveshowsync.local';
-var servidor_wivivoColorines = 'http://192.168.10.155';
-alert(servidor_wivivoColorines);
+var servidor_wivivoColorines = 'http://srv001.liveshowsync.local';
+//var servidor_wivivoColorines = 'http://192.168.10.155';
+//alert(servidor_wivivoColorines);
 var webservice_wivivoColorines = servidor_wivivoColorines + '/liveshowsync/'; 
 var servidor_leeColorines = webservice_wivivoColorines + 'lee.php';
 
@@ -133,12 +133,12 @@ function cerrarColorines(){
 //    return false;
 //}
 
-function atrasAppColorines(){
-    alert('Esta é a última parte. O espectáculo rematou... esperamos que disfrutárades con el. Visita www.aerowi.es se queres saber como fixemos esta app.',finShow(),'FIN DO ESPECTÁCULO','OK');
-    //window.location.href='index.html#tabstrip-show';
-}
+//function atrasAppColorines(){
+//    alert('Esta é a última parte. O espectáculo rematou... esperamos que disfrutárades con el. Visita www.aerowi.es se queres saber como fixemos esta app.',finShow(),'FIN DO ESPECTÁCULO','OK');
+//    //window.location.href='index.html#tabstrip-show';
+//}
 
-function finShow(){
-    stopColorines();
-    window.setTimeout(navigator.app.exitApp, 20000);
-}
+//function finShow(){
+//    stopColorines();
+//    window.setTimeout(navigator.app.exitApp, 20000);
+//}
