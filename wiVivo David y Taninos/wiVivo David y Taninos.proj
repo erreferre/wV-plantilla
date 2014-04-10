@@ -13,14 +13,14 @@
     <iOSStatusBarStyle>Default</iOSStatusBarStyle>
     <AndroidHardwareAcceleration>false</AndroidHardwareAcceleration>
     <WP8SupportedResolutions>ID_RESOLUTION_WVGA;ID_RESOLUTION_WXGA;ID_RESOLUTION_HD720P</WP8SupportedResolutions>
-    <BundleVersion>1.0</BundleVersion>
+    <BundleVersion>2.0</BundleVersion>
     <DisplayName>wiVivo David y Taninos</DisplayName>
     <iOSDisplayName />
     <Description>wiVivo David y Taninos</Description>
     <Author>aerowi</Author>
     <iOSDeviceFamily>1;2</iOSDeviceFamily>
     <iOSBackgroundMode>audio</iOSBackgroundMode>
-    <AndroidVersionCode>1</AndroidVersionCode>
+    <AndroidVersionCode>2</AndroidVersionCode>
     <WP8Requirements />
     <WP8Capabilities />
     <WP8TileTitle />
