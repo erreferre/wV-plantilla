@@ -6,8 +6,8 @@ document.addEventListener("deviceready", onDeviceReady, false);
 function onDeviceReady() {
     //PONER SOLO menubutton EN LA VERSION RELEASE
     document.addEventListener("menubutton", exitAppPopup, false);
-    document.addEventListener("backbutton", irShow, false);
-    //document.addEventListener("backbutton", exitAppPopup, false);
+    //document.addEventListener("backbutton", irShow, false);
+    document.addEventListener("backbutton", exitAppPopup, false);
     //alert('onDeviceReady');
     window.plugins.powerManagement.acquire();
     window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, onFileSystemSuccess, onFileSystemError);

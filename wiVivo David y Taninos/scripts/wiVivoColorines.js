@@ -7,8 +7,12 @@ function onDeviceReadyColorines() {
     document.addEventListener("menubutton", cerrarColorines, false);
     document.addEventListener("backbutton", cerrarColorines, false);
     //document.addEventListener("backbutton", exitAppPopupColorines, false);
+    window.brightness = cordova.require("cordova.plugin.Brightness.Brightness");
+    //brightness.setKeepScreenOn(true);
+    brightness.getBrightness(function(status){brillo = status;},function(status){});
+    brightness.setBrightness('1.0', function(status){},function(status){});
+    window.plugins.powerManagement.acquire();
     startColorines();
-    //alert('ondeviceready colorines');
 };
 
 //variables Globales
@@ -30,6 +34,7 @@ var colorseleccionadoColorines = null;
 var intermitenciaColorines = null;
 var repeColorines1Colorines = null;
 var repeColorines2Colorines = null;
+var brillo = -1;
 
 var checkconexionColorines = 0;
 var errordetectadoColorines = 0;
@@ -49,7 +54,6 @@ function leeConfiguracionColorines() {
 // Lanza Colorines
 function startColorines(){
     if (primeravez !== 0) {leeConfiguracionColorines(); primeravez = 0;}
-    window.plugins.powerManagement.acquire();
 	$.getJSON(servidor_leeColorines)
 	.done(function(data) {  
         $.each(data, function(key, val) {
@@ -108,12 +112,14 @@ function stopColorines(){
         clearTimeout(repeColorines2Colorines);
         repeColorines2Colorines = null;
     }
+    //brightness.setKeepScreenOn(false);
     window.plugins.powerManagement.release();
 }
 
 
 function cerrarColorines(){
     stopColorines();
+    brightness.setBrightness(brillo, function(status){},function(status){});
 	window.location.href='index.html#tabstrip-show';
 }
 
