@@ -6,8 +6,8 @@ document.addEventListener("deviceready", onDeviceReady, false);
 function onDeviceReady() {
     //PONER SOLO menubutton EN LA VERSION RELEASE
     document.addEventListener("menubutton", exitAppPopup, false);
-    //document.addEventListener("backbutton", irShow, false);
-    document.addEventListener("backbutton", exitAppPopup, false);
+    document.addEventListener("backbutton", irShow, false);
+    //document.addEventListener("backbutton", exitAppPopup, false);
     //alert('onDeviceReady');
     window.plugins.powerManagement.acquire();
     window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, onFileSystemSuccess, onFileSystemError);
@@ -142,7 +142,7 @@ function startConsultaServidor(){
 	    			navigator.notification.alert("Isto arrinca... Agora podes ver uns botóns. Non te preocupes, irémosche dicindo cal pulsar...",comienzaShow(),"COMEZA O ESPECTÁCULO!!!", "OK");
         		}
     		}
-            if (aplausoechado === 0 && aplausoactivado === 1 ){
+            if ((aplausoechado === 0) && (aplausoactivado === 1)){
             	//escoje aleatoriamente entre dos sonidos (1 de cada 20)
             	var eleccion = "";
     			var posibilidades = "abcdefghij0123456789";
@@ -352,7 +352,7 @@ function playAudio(src) {
   mi_sonido.play({ playAudioWhenScreenIsLocked : true });
   window.setTimeout(function() {
   	mi_sonido.setVolume('0.0');
-  }, 60000);
+  }, 20000);
 };
 
 function playSuccess() {

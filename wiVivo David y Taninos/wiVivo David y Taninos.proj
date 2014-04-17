@@ -8,18 +8,19 @@
     <IsRunnable>true</IsRunnable>
     <FrameworkVersion>3.2.0</FrameworkVersion>
     <AndroidPermissions>android.permission.INTERNET;android.permission.MODIFY_AUDIO_SETTINGS;android.permission.VIBRATE;android.permission.WAKE_LOCK;android.permission.WRITE_EXTERNAL_STORAGE;android.permission.WRITE_SETTINGS</AndroidPermissions>
-    <CorePlugins>org.apache.cordova.console;org.apache.cordova.device;org.apache.cordova.file;org.apache.cordova.file-transfer;org.apache.cordova.inappbrowser;org.apache.cordova.media;org.apache.cordova.network-information;org.apache.cordova.dialogs;org.apache.cordova.splashscreen;org.apache.cordova.statusbar;org.apache.cordova.vibration</CorePlugins>
+    <CorePlugins>org.apache.cordova.device;org.apache.cordova.file;org.apache.cordova.file-transfer;org.apache.cordova.inappbrowser;org.apache.cordova.media;org.apache.cordova.network-information;org.apache.cordova.dialogs;org.apache.cordova.splashscreen;org.apache.cordova.vibration</CorePlugins>
     <DeviceOrientations>Portrait;Landscape</DeviceOrientations>
     <iOSStatusBarStyle>Default</iOSStatusBarStyle>
     <AndroidHardwareAcceleration>false</AndroidHardwareAcceleration>
     <WP8SupportedResolutions>ID_RESOLUTION_WVGA;ID_RESOLUTION_WXGA;ID_RESOLUTION_HD720P</WP8SupportedResolutions>
     <BundleVersion>3.0</BundleVersion>
-    <DisplayName>wiVivo DEBUG DT</DisplayName>
+    <DisplayName>wiVivo DT</DisplayName>
     <iOSDisplayName />
     <Description>wiVivo David y Taninos</Description>
     <Author>aerowi</Author>
     <iOSDeviceFamily>1;2</iOSDeviceFamily>
-    <iOSBackgroundMode>audio</iOSBackgroundMode>
+    <iOSBackgroundMode>
+    </iOSBackgroundMode>
     <AndroidVersionCode>3</AndroidVersionCode>
     <WP8Requirements />
     <WP8Capabilities />
