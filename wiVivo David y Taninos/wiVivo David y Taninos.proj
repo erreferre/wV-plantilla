@@ -14,9 +14,9 @@
     <AndroidHardwareAcceleration>false</AndroidHardwareAcceleration>
     <WP8SupportedResolutions>ID_RESOLUTION_WVGA;ID_RESOLUTION_WXGA;ID_RESOLUTION_HD720P</WP8SupportedResolutions>
     <BundleVersion>4.0</BundleVersion>
-    <DisplayName>wiVivo DEBUG DT</DisplayName>
+    <DisplayName>wiVivo DT</DisplayName>
     <iOSDisplayName />
-    <Description>wiVivo David y Taninos</Description>
+    <Description>wiVivo DT</Description>
     <Author>aerowi</Author>
     <iOSDeviceFamily>1;2</iOSDeviceFamily>
     <iOSBackgroundMode>

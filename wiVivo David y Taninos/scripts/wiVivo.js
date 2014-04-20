@@ -167,7 +167,7 @@ function startConsultaServidor(){
             if ((guapoechado === 0) && (guapoactivado === 1)){
             	//solo uno de cada 20 sonaran
             	var eleccion_g = "";
-    			var posibilidades_g = "abcdefghij0123456789";
+    			var posibilidades_g = "abcdefghij01234";
                 //var posibilidades_g = "0";
     			eleccion_g = posibilidades_g.charAt(Math.floor(Math.random() * posibilidades_g.length));
             	if (eleccion_g === "0") {playAudio(archivo_guapo);}
@@ -183,7 +183,7 @@ function startConsultaServidor(){
             if ((pedoechado === 0) && (pedoactivado === 1)){
             	//solo uno de cada 20 sonaran
             	var eleccion_p = "";
-    			var posibilidades_p = "abcdefghij0123456789";
+    			var posibilidades_p = "abcdefghij01234";
     			//var posibilidades_p = "0";
                 eleccion_p = posibilidades_p.charAt(Math.floor(Math.random() * posibilidades_p.length));
             	if (eleccion_p === "0") {playAudio(archivo_pedo);}
