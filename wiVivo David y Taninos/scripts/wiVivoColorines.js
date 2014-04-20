@@ -24,7 +24,7 @@ var webservice_wivivoColorines = servidor_wivivoColorines + '/liveshowsync/';
 var servidor_leeColorines = webservice_wivivoColorines + 'lee.php';
 
 //VARIABLES DE TIEMPO DE BUCLES
-var startcolorinessettimeout = 20000;
+var startcolorinessettimeout = 10000;
 var startcolorinessetinterval = 200;
 
 //variables Colorines
@@ -71,7 +71,7 @@ function startColorines(){
 	    		coloresColorines = ["#FFFFFF",tmp,tmp,tmp,tmp,tmp,tmp,tmp,tmp,tmp,tmp,tmp,tmp,tmp,tmp,tmp,tmp,tmp,tmp,tmp,tmp,tmp,tmp,tmp,tmp];
        	 }
         	if (intermitenciaColorines === 2) {
-        		coloresColorines = ["#FFFFFF",tmp];
+        		coloresColorines = [val.color1,val.color2];
         	}
         	if (intermitenciaColorines !== 0) {
         		repeColorines1Colorines = setInterval(function() {
@@ -95,7 +95,7 @@ function startColorines(){
         }
         if (alertasactivadasColorines === 1){
             if (errornotificacionesColorines === 1){
-	            navigator.notification.alert("Parece que perdín a conexión... volve premer o botón Colorines",cerrarColorines(),"ERRO NA COMUNICACION", "OK");
+	            navigator.notification.alert("Parece que perdín a conexión... volve premer o botón",cerrarColorines(),"ERRO NA COMUNICACION", "OK");
 	        }
             errornotificacionesColorines = errornotificacionesColorines - 1;
         }
