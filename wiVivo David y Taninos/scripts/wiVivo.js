@@ -440,7 +440,7 @@ function exitAppPopup() {
         , function(button) {
               if (button === 2) {
                   window.plugins.powerManagement.release();
-                  stopConsultaServidor();stopSelfie();stopLoto();
+                  stopConsultaServidor();stopSelfie();
                   navigator.app.exitApp();
               } 
           }
