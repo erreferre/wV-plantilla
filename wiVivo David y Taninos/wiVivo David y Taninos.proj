@@ -13,7 +13,7 @@
     <iOSStatusBarStyle>Default</iOSStatusBarStyle>
     <AndroidHardwareAcceleration>false</AndroidHardwareAcceleration>
     <WP8SupportedResolutions>ID_RESOLUTION_WVGA;ID_RESOLUTION_WXGA;ID_RESOLUTION_HD720P</WP8SupportedResolutions>
-    <BundleVersion>4.0</BundleVersion>
+    <BundleVersion>11.0</BundleVersion>
     <DisplayName>wiVivo DT</DisplayName>
     <iOSDisplayName />
     <Description>wiVivo DT</Description>
@@ -21,9 +21,9 @@
     <iOSDeviceFamily>1;2</iOSDeviceFamily>
     <iOSBackgroundMode>
     </iOSBackgroundMode>
-    <AndroidVersionCode>4</AndroidVersionCode>
+    <AndroidVersionCode>11</AndroidVersionCode>
     <WP8Requirements />
-    <WP8Capabilities />
+    <WP8Capabilities>ID_CAP_MEDIALIB_AUDIO;ID_CAP_MEDIALIB_PHOTO;ID_CAP_MEDIALIB_PLAYBACK;ID_CAP_NETWORKING;ID_CAP_REMOVABLE_STORAGE;ID_CAP_WEBBROWSERCOMPONENT</WP8Capabilities>
     <WP8TileTitle />
     <WP8ProductID>{ba9605d8-d4ae-407c-8251-660424f19e78}</WP8ProductID>
     <WP8PublisherID>{e36b058a-5d13-4318-b092-402640dcde8d}</WP8PublisherID>
