@@ -3,25 +3,25 @@
   <PropertyGroup>
     <ProjectGuid>ba9605d8-d4ae-407c-8251-660424f19e78</ProjectGuid>
     <ProjectTypeGuids>{070BCB52-5A75-4F8C-A973-144AF0EAFCC9}</ProjectTypeGuids>
-    <AppIdentifier>es.aerowi.wivivodavidtaninos</AppIdentifier>
+    <AppIdentifier>es.aerowi.wivivo</AppIdentifier>
     <ProjectName>wiVivo plantilla</ProjectName>
     <IsRunnable>true</IsRunnable>
     <FrameworkVersion>3.2.0</FrameworkVersion>
-    <AndroidPermissions>android.permission.INTERNET;android.permission.MODIFY_AUDIO_SETTINGS;android.permission.VIBRATE;android.permission.WAKE_LOCK;android.permission.WRITE_EXTERNAL_STORAGE;android.permission.WRITE_SETTINGS</AndroidPermissions>
-    <CorePlugins>org.apache.cordova.device;org.apache.cordova.file;org.apache.cordova.file-transfer;org.apache.cordova.inappbrowser;org.apache.cordova.media;org.apache.cordova.network-information;org.apache.cordova.dialogs;org.apache.cordova.splashscreen;org.apache.cordova.vibration</CorePlugins>
+    <AndroidPermissions>android.permission.CAMERA;android.permission.VIBRATE;android.permission.INTERNET;android.permission.MODIFY_AUDIO_SETTINGS;android.permission.WRITE_EXTERNAL_STORAGE;android.permission.WAKE_LOCK</AndroidPermissions>
+    <CorePlugins>org.apache.cordova.camera;org.apache.cordova.media-capture;org.apache.cordova.device;org.apache.cordova.file;org.apache.cordova.file-transfer;org.apache.cordova.inappbrowser;org.apache.cordova.media;org.apache.cordova.network-information;org.apache.cordova.dialogs;org.apache.cordova.splashscreen;org.apache.cordova.vibration</CorePlugins>
     <DeviceOrientations>Portrait;Landscape</DeviceOrientations>
     <iOSStatusBarStyle>Default</iOSStatusBarStyle>
     <AndroidHardwareAcceleration>false</AndroidHardwareAcceleration>
     <WP8SupportedResolutions>ID_RESOLUTION_WVGA;ID_RESOLUTION_WXGA;ID_RESOLUTION_HD720P</WP8SupportedResolutions>
-    <BundleVersion>11.0</BundleVersion>
-    <DisplayName>wiVivo DT</DisplayName>
+    <BundleVersion>1.0</BundleVersion>
+    <DisplayName>wiVivo</DisplayName>
     <iOSDisplayName />
-    <Description>wiVivo DT</Description>
+    <Description>wiVivo plantilla</Description>
     <Author>aerowi</Author>
     <iOSDeviceFamily>1;2</iOSDeviceFamily>
     <iOSBackgroundMode>
     </iOSBackgroundMode>
-    <AndroidVersionCode>11</AndroidVersionCode>
+    <AndroidVersionCode>1</AndroidVersionCode>
     <WP8Requirements />
     <WP8Capabilities>ID_CAP_MEDIALIB_AUDIO;ID_CAP_MEDIALIB_PHOTO;ID_CAP_MEDIALIB_PLAYBACK;ID_CAP_NETWORKING;ID_CAP_REMOVABLE_STORAGE;ID_CAP_WEBBROWSERCOMPONENT</WP8Capabilities>
     <WP8TileTitle />

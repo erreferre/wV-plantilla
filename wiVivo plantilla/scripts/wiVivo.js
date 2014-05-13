@@ -4,38 +4,36 @@ document.addEventListener("deviceready", onDeviceReady, false);
 
 // PhoneGap is ready
 function onDeviceReady() {
-    //PONER SOLO menubutton EN LA VERSION RELEASE
+    //CAMBIAR SI HACE FALTA EN LA VERSION RELEASE
     document.addEventListener("menubutton", exitAppPopup, false);
     //document.addEventListener("backbutton", irShow, false);
     document.addEventListener("backbutton", exitAppPopup, false);
-    //alert('onDeviceReady');
     window.plugins.powerManagement.acquire();
     window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, onFileSystemSuccess, onFileSystemError);
     startConsultaServidor();
 };
 
 //variables Globales
-//CAMBIAR PARA COMPILAR RELEASE
+//CAMBIAR EN LA VERSION RELEASE
 var servidor_wivivo = 'http://srv001.liveshowsync.local';
 //var servidor_wivivo = 'http://192.168.10.155';
+//alert (servidor_wivivo);
 var webservice_wivivo = servidor_wivivo + '/liveshowsync/'; 
-//alert (webservice_wivivo);
 
 //var servidor_streaming = null;
 //var servidor_streaming = 'http://192.168.10.140:8080/jsfs.html';
 
 var servidor_lee = webservice_wivivo + 'lee.php';
-//var servidor_sube = webservice_wivivo + 'sube.php';
+var servidor_sube = webservice_wivivo + 'sube.php';
 var servidor_selfie = webservice_wivivo + 'leeThumbs.php';
 var servidor_imagenes = webservice_wivivo + 'subido/';
 var servidor_thumbs = webservice_wivivo + 'subido/thumbs/';
 
-var repeConsultaServidor1 = null;
-
 //tiempos iteracion de bucles
+var repeConsultaServidor1 = null;
 var startconsultaservidorsettimeout = 10000;
 var startselfiesettimeout = 20000;
-//var startlotosettimeout = 20000;
+var startlotosettimeout = 20000;
 
 //variables Guapo
 var archivo_guapo = 'sonidos/guapo.mp3';
@@ -53,24 +51,25 @@ var pedoactivado = 0;
 var pedoechado = 0;
 
 //variables Loto
-//var servidor_leeLoto = webservice_wivivo + 'leeLoto.php';
-//var ganador = 0;
-//var lotoactivada = 0;
-//var loto = 0;
-//var repeLoto1 = null;
+var servidor_leeLoto = webservice_wivivo + 'leeLoto.php';
+var ganador = 0;
+var lotoactivada = 0;
+var loto = 0;
+var repeLoto1 = null;
 
 //variables Selfie
 var tiposelfie = 0;
 var repeSelfie1 = null;
 var filePath = null;
+
 function onFileSystemSuccess(fileSystem) {
         if (device.platform === 'Android'){
         	filePath = fileSystem.root.fullPath+'\/'+'DavidAmorSelfie_';
     	} else {
 			filePath = fileSystem.root.fullPath+"\/"+'DavidAmorSelfie_';
     	}
-        //alert(filePath);
 };
+
 function onFileSystemError(error) {
     	console.log(error.code);
 }; 
@@ -93,15 +92,12 @@ var alertasactivadas = 1;
 //    	"\n repeColorines2:"+repeColorines2+"\n checkconexion:"+checkconexion,"INFO","INFO","OK");
 //};
 
-
 // Se lanza onDeviceready
 // chequea conexion, habilita los botones, popup alerta indicando que empezamos, espera sonidos.
 function startConsultaServidor(){
     var newHTML1;
-    //var newHTMLfogar;
-    var newHTMLshow, newHTMLshowb1, newHTMLshowb2, newHTMLshowb3, newHTMLshowb4, newHTMLshowb5;
-    var newHTMLselfie;
-    //var newHTMLloto;
+    var newHTMLshow, newHTMLshowb1, newHTMLshowb2, newHTMLshowb3, newHTMLshowb4, newHTMLshowb5, newHTMLshowb6;
+    var newHTMLselfie, newHTMLloto, newHTMLtwit;
     var data;
     var val;
     $.getJSON(servidor_lee)
@@ -118,45 +114,47 @@ function startConsultaServidor(){
             tiposelfie = val.tiposelfie;
             startconsultaservidorsettimeout = val.startConsultaServidorsetTimeout;
 			startselfiesettimeout = val.startSelfiesetTimeout;
-			//startlotosettimeout = val.startLotosetTimeout;
+			startlotosettimeout = val.startLotosetTimeout;
 		    if (comienzashow === 0) {
     			newHTML1 = '<font color="black"><h2><p>TODAVÍA NON COMEZOU O ESPECTÁCULO E A MAIORÍA DAS FUNCIÓNS DESTA APP ESTÁN DESHABILITADAS<p>\
 					<p>PRESTA ATENCIÓN ÁS INSTRUCCIÓN QUE VOS IREMOS DANDO</p></h2></font>';
-        		//document.getElementById("div-comienzaShow-fogar").innerHTML = newHTML1;
         		document.getElementById("div-comienzaShow-show").innerHTML = newHTML1;
         		document.getElementById("div-comienzaShow-selfie").innerHTML = newHTML1;
-        		//document.getElementById("div-comienzaShow-loto").innerHTML = newHTML1;
+        		document.getElementById("div-comienzaShow-loto").innerHTML = newHTML1;
+                document.getElementById("div-comienzaShow-twit").innerHTML = newHTML1;
     		} else {
-        		//newHTMLfogar = '<p><button width="100%" class="boton-negro boton-centro boton-text-all-color" type="button" \
-        		//onclick="window.location.href=\'#tabstrip-show\';"><h1 color="white">::::::::::::::::::::<br/><br/>\
-        		//<br/>cando comece o <strong>Show...</strong> preme este botón!!!<br/><br/><br/>::::::::::::::::::::<br/></h1></button></p>';
         		newHTMLshow = '';
                 newHTMLshowb1 = '<p><button width="100%" class="boton-negro boton-centro boton-text-all-color" type="button" \
         			onclick="mensajeGuapoActivado();if (repeConsultaServidor1===null) startConsultaServidor();">\
                 	<h1>::::::::::::::::::::::::::<br/>lector de mentes<br/>::::::::::::::::::::::::::<br/></h1></button></p>';
                 newHTMLshowb2 = '<p><button width="100%" class="boton-negro boton-centro boton-text-all-color" type="button" \
         			onclick="mensajeAplausoActivado();if (repeConsultaServidor1===null) startConsultaServidor();">\
-                	<h1>::::::::::::::::::::::::::<br/>comodidade<br/>::::::::::::::::::::::::::<br/></h1></button></p>';
+                	<h1>::::::::::::::::::::::::::<br/>momento comodidade<br/>::::::::::::::::::::::::::<br/></h1></button></p>';
                 newHTMLshowb3 = '<p><button width="100%" class="boton-negro boton-centro boton-text-all-color" type="button" \
         			onclick="mensajePedoActivado();if (repeConsultaServidor1===null) startConsultaServidor();">\
         			<h1>::::::::::::::::::::::::::<br/>momento incómodo<br/>::::::::::::::::::::::::::<br/></h1></button></p>';
                 newHTMLshowb4 = '<p><button width="100%" class="boton-negro boton-centro boton-text-all-color" type="button" \
         			onclick="window.location.href=\'#tabstrip-selfie\';if (repeSelfie1===null) startSelfie();">\
-        			<h1>::::::::::::::::::::::::::<br/>selfie<br/>::::::::::::::::::::::::::<br/></h1></button></p>';
+        			<h1>::::::::::::::::::::::::::<br/>momento selfie<br/>::::::::::::::::::::::::::<br/></h1></button></p>';
                 newHTMLshowb5 = '<p><button width="100%" class="boton-negro boton-centro boton-text-all-color" type="button" \
         			onclick="window.open(\'colorines.html\');">\
-        			<h1>::::::::::::::::::::::::::<br/>momento hortera<br/>::::::::::::::::::::::::::<br/></h1></button></p>';
+        			<h1>::::::::::::::::::::::::::<br/>momento colorines<br/>::::::::::::::::::::::::::<br/></h1></button></p>';
+                newHTMLshowb6 = '<p><button width="100%" class="boton-negro boton-centro boton-text-all-color" type="button" \
+        			onclick="window.location.href=\'#tabstrip-twit\';if (repeTwit1===null) startTwit();">\
+        			<h1>::::::::::::::::::::::::::<br/>momento twit<br/>::::::::::::::::::::::::::<br/></h1></button></p>';
         		newHTMLselfie = '';
-        		//newHTMLloto = '';
-        		//document.getElementById("div-comienzaShow-fogar").innerHTML = newHTMLfogar;
+        		newHTMLloto = '';
+                newHTMLtwit = '';
         		document.getElementById("div-comienzaShow-show").innerHTML = newHTMLshow;
         		document.getElementById("div-comienzaShow-showb1").innerHTML = newHTMLshowb1;
                 document.getElementById("div-comienzaShow-showb2").innerHTML = newHTMLshowb2;
                 document.getElementById("div-comienzaShow-showb3").innerHTML = newHTMLshowb3;
                 document.getElementById("div-comienzaShow-showb4").innerHTML = newHTMLshowb4;
                 document.getElementById("div-comienzaShow-showb5").innerHTML = newHTMLshowb5;
+                document.getElementById("div-comienzaShow-showb6").innerHTML = newHTMLshowb6;
                 document.getElementById("div-comienzaShow-selfie").innerHTML = newHTMLselfie;
-        		//document.getElementById("div-comienzaShow-loto").innerHTML = newHTMLloto;
+        		document.getElementById("div-comienzaShow-loto").innerHTML = newHTMLloto;
+        		document.getElementById("div-comienzaShow-twit").innerHTML = newHTMLtwit;
         		if ((primeravezcomienzashow === 1)&&(showcomenzado === 0)){
         			primeravezcomienzashow = 0;
                     navigator.notification.beep(2);
@@ -166,20 +164,22 @@ function startConsultaServidor(){
     		}
             if ((guapoechado === 0) && (guapoactivado === 1)){
             	//solo uno de cada 20 sonaran
-            	var eleccion_g = "";
-    			var posibilidades_g = "abcdefghij01234";
-                //var posibilidades_g = "0";
-    			eleccion_g = posibilidades_g.charAt(Math.floor(Math.random() * posibilidades_g.length));
-            	if (eleccion_g === "0") {playAudio(archivo_guapo);}
-            	guapoechado = 1;
-        	}
-        	if (guapoactivado === 0) {guapoechado = 0;}
+            	//var eleccion_g = "";
+    			//var posibilidades_g = "abcdefghij01234";
+                //eleccion_g = posibilidades_g.charAt(Math.floor(Math.random() * posibilidades_g.length));
+            	//if (eleccion_g === "0") {playAudio(archivo_guapo);}
+                
+                //suena en todos
+            	playAudio(archivo_guapo);
+                
+                guapoechado = 1;
+        	} else if (guapoactivado === 0) {guapoechado = 0;}
             if ((aplausoechado === 0) && (aplausoactivado === 1)){
             	//en todos suena aplauso
             	playAudio(archivo_aplauso);
-            	aplausoechado = 1;
-        	}
-        	if (aplausoactivado === 0) {aplausoechado = 0;}
+            	
+                aplausoechado = 1;
+        	} else if (aplausoactivado === 0) {aplausoechado = 0;}
             if ((pedoechado === 0) && (pedoactivado === 1)){
             	//solo uno de cada 20 sonaran
             	var eleccion_p = "";
@@ -188,8 +188,7 @@ function startConsultaServidor(){
                 eleccion_p = posibilidades_p.charAt(Math.floor(Math.random() * posibilidades_p.length));
             	if (eleccion_p === "0") {playAudio(archivo_pedo);}
             	pedoechado = 1;
-        	}
-        	if (pedoactivado === 0) {pedoechado = 0;}            
+        	} else if (pedoactivado === 0) {pedoechado = 0;}            
         });
         if (errordetectado === 1){
             if (alertasactivadas === 1){
@@ -201,10 +200,10 @@ function startConsultaServidor(){
 	.fail(function(jqxhr, textStatus, error){
     	newHTML1 = '<font color="black"><h2><p>NON ESTÁS CORRECTAMENTE CONECTADO Ó ESPECTÁCULO.</p>\
         	<p>REVISA QUE TEÑAS A WIFI ACTIVADA NO TEU TELÉFONO E ESTÉS CONECTADO Á NOSA WIFI</p></h2></font>';
-        		//document.getElementById("div-comienzaShow-fogar").innerHTML = newHTML1;
         		document.getElementById("div-comienzaShow-show").innerHTML = newHTML1;
         		document.getElementById("div-comienzaShow-selfie").innerHTML = newHTML1;
-        		//document.getElementById("div-comienzaShow-loto").innerHTML = newHTML1;
+        		document.getElementById("div-comienzaShow-loto").innerHTML = newHTML1;
+        		document.getElementById("div-comienzaShow-twit").innerHTML = newHTML1;
         if (errordetectado === 0){
             errordetectado = 1;
             errornotificaciones = 8;
@@ -233,7 +232,7 @@ function comienzaShow(){
     //var newHTML = "";
     //if (streamingactivado ===1) {
     //    newHTML = '<iframe src="'+servidor_streaming+'" width="100%" frameborder="0" scrolling="no"></iframe>';
-    //	document.getElementById("div-comienzaShow-fogar-streaming").innerHTML = newHTML;
+    //	document.getElementById("").innerHTML = newHTML;
     //}
     window.location.href='index.html#tabstrip-show';
 };
@@ -315,13 +314,10 @@ function startSelfie(){
 function stopSelfie(){
     if (repeSelfie1 !== null) clearTimeout(repeSelfie1);
     repeSelfie1 = null;
-    //mostrarVariables();
 };
-
    
 // Descarga Imagen
 function descargaImagen(imagen){
-    //alert('descargaImagen');
 	var fileTransfer = new FileTransfer();
 	var uri = encodeURI(servidor_imagenes+imagen);
     var rutaImagen = filePath+imagen;
@@ -341,74 +337,69 @@ function descargaImagen(imagen){
     	function(entry) {
             document.getElementById("div-resultado-descarga").innerHTML = '';
             document.getElementById("div-resultado-descarga-ruta").innerHTML += 'Foto gardada en: '+entry.fullPath+'<br/>';
-        	//alert("descarga completada: " + entry.fullPath);
     	},
     	function(error) {
         	document.getElementById("div-resultado-descarga").innerHTML = 'Houbo un erro, volve a descargala';
-			//alert("descarga con erro: "+error.source+" destino: "+error.target+" codigo: " + error.code);
     	});
 };
 
-
 // Lanza Loto
 //function startLoto(){
-//	var data;
-//    var val;
-//   var newHTMLloto2;
-    //mostrarVariables();
-//    newHTMLloto2 = '<button width="100%" class="boton-negro boton-centro boton-text-all-color"><h2>\
-//            ¿Quen será o afortunado...? Permanece atento á pantalla.</h2></button>';
-//	if (ganador === 0) {document.getElementById("div-comienzaShow-loto2").innerHTML = newHTMLloto2;        
-//    } else {
-//           document.getElementById("div-comienzaShow-loto2").innerHTML = ''; 
-//    }
-//    $.getJSON(servidor_leeLoto)
-//    	.done(function(data) {  
-//	        $.each(data, function(key, val) {
-//    	        comienzashow = val.comienzashow;
-//                alertasactivadas = val.alertasactivadas;
-//                servidor_streaming = val.streaming;
-//                streamingactivado = val.streamingactivado;
-//            	lotoactivada = val.lotoactivada;
-//            	loto = val.loto;
-//            	if (ganador === 1 || (loto === 1 && lotoactivada === 1)){
-//            		ganador = 1;
-//                	var lotoFoto = document.getElementById('tabstrip-lotoFoto');
-//	            	lotoFoto.style.display = 'block';
-//           	 	lotoFoto.src = './imagenes/arale.jpg';
-//                	if (lotoactivada === 1) playAudio(archivo_pedo);
-//            	}
-//        	});
-//            if (errordetectado === 1){
-//                if (alertasactivadas === 1){
-//                    navigator.notification.alert("Parece que xa vai...",irShow(),"COMUNICACION RECUPERADA", "OK");
-//            	}
-//            }
-//            errordetectado = 0;
-//    	})
-//	    .fail(function(jqxhr, textStatus, error){
-//    		if (errordetectado === 0){
-//                errordetectado = 1;
-//                errornotificaciones = 8;
-//			}
-//            if (alertasactivadas === 1){
-//                if (errornotificaciones === 5){
-//                	navigator.notification.alert("Proba de novo... parece que non dou conectado",irShow(),"ERRO NA COMUNICACION", "OK");
-//                } else if (errornotificaciones === 1){
-//	                navigator.notification.alert("Sae da App (pulsando o botón menú do teu móbil), conéctate á WiFi, e volve a lanza-la App",irFogar(),"ERRO NA COMUNICACION", "OK");
-//                }
-//                errornotificaciones = errornotificaciones - 1;
-//            }
-//    	});
-//    repeLoto1 = setTimeout(startLoto, startlotosettimeout);
-//};
+	var data;
+    var val;
+    var newHTMLloto2;
+    newHTMLloto2 = '<button width="100%" class="boton-negro boton-centro boton-text-all-color"><h2>\
+            ¿Quen será o afortunado...? Permanece atento á pantalla.</h2></button>';
+	if (ganador === 0) {document.getElementById("div-comienzaShow-loto2").innerHTML = newHTMLloto2;        
+    } else {
+           document.getElementById("div-comienzaShow-loto2").innerHTML = ''; 
+    }
+    $.getJSON(servidor_leeLoto)
+    	.done(function(data) {  
+	        $.each(data, function(key, val) {
+    	        comienzashow = val.comienzashow;
+                alertasactivadas = val.alertasactivadas;
+                servidor_streaming = val.streaming;
+                streamingactivado = val.streamingactivado;
+            	lotoactivada = val.lotoactivada;
+            	loto = val.loto;
+            	if (ganador === 1 || (loto === 1 && lotoactivada === 1)){
+            		ganador = 1;
+                	var lotoFoto = document.getElementById('tabstrip-lotoFoto');
+	            	lotoFoto.style.display = 'block';
+            	 	lotoFoto.src = './imagenes/arale.jpg';
+                	if (lotoactivada === 1) playAudio(archivo_pedo);
+            	}
+        	});
+            if (errordetectado === 1){
+                if (alertasactivadas === 1){
+                    navigator.notification.alert("Parece que xa vai...",irShow(),"COMUNICACION RECUPERADA", "OK");
+            	}
+            }
+            errordetectado = 0;
+    	})
+	    .fail(function(jqxhr, textStatus, error){
+    		if (errordetectado === 0){
+                errordetectado = 1;
+                errornotificaciones = 8;
+			}
+            if (alertasactivadas === 1){
+                if (errornotificaciones === 5){
+                	navigator.notification.alert("Proba de novo... parece que non dou conectado",irShow(),"ERRO NA COMUNICACION", "OK");
+                } else if (errornotificaciones === 1){
+	                navigator.notification.alert("Sae da App (pulsando o botón menú do teu móbil), conéctate á WiFi, e volve a lanza-la App",irFogar(),"ERRO NA COMUNICACION", "OK");
+                }
+                errornotificaciones = errornotificaciones - 1;
+            }
+    	});
+    repeLoto1 = setTimeout(startLoto, startlotosettimeout);
+};
 
 // Cancela Loto
-//function stopLoto(){
-//    if (repeLoto1 !== null) clearTimeout(repeLoto1);
-//    repeLoto1 = null;
-//};
- 
+function stopLoto(){
+    if (repeLoto1 !== null) clearTimeout(repeLoto1);
+    repeLoto1 = null;
+};
 
 // Play sonidos
 var mi_sonido = null;

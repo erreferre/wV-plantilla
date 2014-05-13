@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>wiVivo David y Taninos</title>
+    <title>wiVivo</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="styles/kendo.mobile.all.min.css"/>
     <link rel="stylesheet" href="styles/wiVivo.DavidTaninos.kendo.mobile.css"/>
@@ -13,7 +13,7 @@
     <script type="text/javascript" src="scripts/kendo.mobile.min.js"></script>
     <script type="text/javascript" src="scripts/app.js"></script>
 </head>
-<body id="pantalla_fogar"><!-- onload="alert('onload');">-->
+<body id="pantalla_fogar">
     <!--Inicio-->
     <div id="tabstrip-fogar" data-role="view" data-title="Fogar">
     	<div class="view-content"> 
@@ -138,7 +138,8 @@
         <div id="div-comienzaShow-showb3"><!--BOTON3--></div>
         <div id="div-comienzaShow-showb3-mensaje"><!--BOTON3 mensaje--></div>
         <div id="div-comienzaShow-showb4"><!--BOTON4--></div>
-        <div id="div-comienzaShow-showb5"><!--BOTON4--></div>
+        <div id="div-comienzaShow-showb5"><!--BOTON5--></div>
+        <div id="div-comienzaShow-showb6"><!--BOTON6--></div>
         </h2></font>
         <font color="black"><div><p>&copy; aerowi.es 2014</p></div></font>
     </div>
@@ -158,12 +159,19 @@
     </div>
     
 <!--Loto-->    
-<!--    <div id="tabstrip-loto"  data-role="view" data-title="Loto">
-        <div id="div-comienzaShow-loto">BOTON COMEZASHOW</div>
-	    <div id="div-comienzaShow-loto2">EXPLICACION LOTO</div>
+    <div id="tabstrip-loto"  data-role="view" data-title="Loto">
+        <div id="div-comienzaShow-loto"><!--BOTON COMEZASHOW--></div>
+	    <div id="div-comienzaShow-loto2"><!--EXPLICACION LOTO--></div>
         <img id="tabstrip-lotoFoto" style="display:none;margin:10px auto; width:100%;" src=""/>
     	<font color="black"><div><p>&copy; aerowi.es 2014</p></div></font>
-    </div>-->
+    </div>
+
+<!--Redes Sociales-->
+    <div id="tabstrip-twit"  data-role="view" data-title="Twit">
+        <div id="div-comienzaShow-twit"><!--BOTON COMEZASHOW--></div>
+	    <div id="div-comienzaShow-twit2"><!--EXPLICACION TWIT--></div>
+    	<font color="black"><div><p>&copy; aerowi.es 2014</p></div></font>
+    </div>
     
 <!--Layout-->
     <div data-role="layout" data-id="tabstrip-layout">
@@ -180,7 +188,8 @@
                 <a href="#tabstrip-nos" data-icon="bookmarks">Nós</a>
                 <a href="#tabstrip-show" data-icon="add">Show</a>
                 <a href="#tabstrip-selfie" data-icon="camera">Selfie</a>
-                <!--<a href="#tabstrip-loto" data-icon="favorites">Loto</a>-->
+                <a href="#tabstrip-loto" data-icon="favorites">Loto</a>
+                <a href="#tabstrip-twit" data-icon="favorites">Twit</a>
             </div>
         </div>
     </div>
