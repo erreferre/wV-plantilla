@@ -4,7 +4,7 @@
     <ProjectGuid>ba9605d8-d4ae-407c-8251-660424f19e78</ProjectGuid>
     <ProjectTypeGuids>{070BCB52-5A75-4F8C-A973-144AF0EAFCC9}</ProjectTypeGuids>
     <AppIdentifier>es.aerowi.wivivodavidtaninos</AppIdentifier>
-    <ProjectName>wiVivo David y Taninos</ProjectName>
+    <ProjectName>wiVivo plantilla</ProjectName>
     <IsRunnable>true</IsRunnable>
     <FrameworkVersion>3.2.0</FrameworkVersion>
     <AndroidPermissions>android.permission.INTERNET;android.permission.MODIFY_AUDIO_SETTINGS;android.permission.VIBRATE;android.permission.WAKE_LOCK;android.permission.WRITE_EXTERNAL_STORAGE;android.permission.WRITE_SETTINGS</AndroidPermissions>
