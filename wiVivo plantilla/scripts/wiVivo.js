@@ -424,6 +424,145 @@ function playError(error) {
 };
 
 
+//Fotos con "capture"
+//function captureImage() {
+    // Launch device camera application, 
+//    navigator.device.capture.captureImage(captureSuccess, captureError, {limit: 1});
+//}
+
+//function captureSuccess(mediaFiles) {
+//        var i, len;
+//        for (i = 0, len = mediaFiles.length; i < len; i += 1) {
+//            var smallImage = document.getElementById('smallImage');
+//            smallImage.style.display = 'block';
+            // Show the captured photo.
+//            smallImage.src = mediaFiles[i].fullPath;
+//            rutafoto = document.getElementById("rutafoto");
+//        	rutafoto.innerHTML = '<p>quédache a foto eiquí: ' + mediaFiles[i].fullPath + '</p>';
+//		    rutasubida = document.getElementById("rutasubida");
+//			rutasubida.innerHTML = '<p>espera uns segundos a que sexa subida...</p>';
+//            uploadPhoto(mediaFiles[i]);
+//        }       
+//}
+// Called if something bad happens.
+//function captureError(error) {
+//        alert('erro durante a captura: ' + error.code);
+//        navigator.notification.alert(msg, null, 'Uh oh!');
+//}
+
+//SUBE FOTO
+//function uploadPhoto(mediaFile) {
+//            var options = new FileUploadOptions();
+//    		options.fileKey = "file";        
+//            options.fileName = makeId() + ".jpg";
+//            options.mimeType = "image/jpeg";
+//    		options.chunkedMode = false;
+//    		options.headers = {Connection: "close"};
+//            path = mediaFile.fullPath;
+//            var params = {};
+//            params.value1 = "Show David&Taninos";
+//            params.value2 = "davytan";
+//            options.params = params;
+//            var ft = new FileTransfer();
+//            ft.upload(path, servidor_sube, uploadSuccess, uploadError, options, true);
+//}
+//
+//function uploadSuccess(r) {
+//            console.log("Code = " + r.responseCode);
+//            console.log("Response = " + r.response);
+//            console.log("Sent = " + r.bytesSent);
+//		    rutasubida = document.getElementById("rutasubida");
+        	//rutasubida.innerHTML = '<p>foto subida OK!<br/>' + r.responseCode + '<br/>' + r.response + '<br/>' + r.bytesSent + '</p>'
+//			rutasubida.innerHTML = '<p>foto subida OK!</p>';
+//}
+//
+//function uploadError(error) {
+//            alert("erro durante a subida: Code = " + error.code + ", source = " + error.source + ", target = " + error.target);
+//            console.log("upload error source " + error.source);
+//            console.log("upload error target " + error.target);
+//}
+
+//nombre de imagen aleatorio
+//function makeId(){
+//    var text = "";
+//    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+//    for( var i=0; i < 8; i++ )
+//        text += possible.charAt(Math.floor(Math.random() * possible.length));
+//    return text;
+//}
+
+//envio de tweet (y facebook,...)
+//
+//function enviaSMS(){
+//var tweet = document.getElementById('tweet');    
+//var message = {
+//    text: hashtag + " " + tweet.value,
+//    activityTypes: ["PostToTwitter"]
+//};
+//window.socialmessage.send(message);
+//}
+
+
+// Lanza Loto
+//function startLoto(){
+//	var data;
+//    var val;
+//   var newHTMLloto2;
+    //mostrarVariables();
+//    newHTMLloto2 = '<button width="100%" class="boton-negro boton-centro boton-text-all-color"><h2>\
+//            ¿Quen será o afortunado...? Permanece atento á pantalla.</h2></button>';
+//	if (ganador === 0) {document.getElementById("div-comienzaShow-loto2").innerHTML = newHTMLloto2;        
+//    } else {
+//           document.getElementById("div-comienzaShow-loto2").innerHTML = ''; 
+//    }
+//    $.getJSON(servidor_leeLoto)
+//    	.done(function(data) {  
+//	        $.each(data, function(key, val) {
+//    	        comienzashow = val.comienzashow;
+//                alertasactivadas = val.alertasactivadas;
+//                servidor_streaming = val.streaming;
+//                streamingactivado = val.streamingactivado;
+//            	lotoactivada = val.lotoactivada;
+//            	loto = val.loto;
+//            	if (ganador === 1 || (loto === 1 && lotoactivada === 1)){
+//            		ganador = 1;
+//                	var lotoFoto = document.getElementById('tabstrip-lotoFoto');
+//	            	lotoFoto.style.display = 'block';
+//           	 	lotoFoto.src = './imagenes/arale.jpg';
+//                	if (lotoactivada === 1) playAudio(archivo_pedo);
+//            	}
+//        	});
+//            if (errordetectado === 1){
+//                if (alertasactivadas === 1){
+//                    navigator.notification.alert("Parece que xa vai...",irShow(),"COMUNICACION RECUPERADA", "OK");
+//            	}
+//            }
+//            errordetectado = 0;
+//    	})
+//	    .fail(function(jqxhr, textStatus, error){
+//    		if (errordetectado === 0){
+//                errordetectado = 1;
+//                errornotificaciones = 8;
+//			}
+//            if (alertasactivadas === 1){
+//                if (errornotificaciones === 5){
+//                	navigator.notification.alert("Proba de novo... parece que non dou conectado",irShow(),"ERRO NA COMUNICACION", "OK");
+//                } else if (errornotificaciones === 1){
+//	                navigator.notification.alert("Sae da App (pulsando o botón menú do teu móbil), conéctate á WiFi, e volve a lanza-la App",irFogar(),"ERRO NA COMUNICACION", "OK");
+//                }
+//                errornotificaciones = errornotificaciones - 1;
+//            }
+//    	});
+//    repeLoto1 = setTimeout(startLoto, startlotosettimeout);
+//};
+
+// Cancela Loto
+//function stopLoto(){
+//    if (repeLoto1 !== null) clearTimeout(repeLoto1);
+//    repeLoto1 = null;
+//};
+
+
 //opcion de Exit
 function exitAppPopup() {
     navigator.notification.confirm(
